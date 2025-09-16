@@ -1,80 +1,204 @@
-# 🏗 Scaffold-ETH 2
+# Sunny ☀️
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+### El Protocolo que Transforma Interacciones Reales en Valor Digital Verificable.
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+*Un proyecto para la Hackathon ETH Uruguay 2025 - Categoría RWA, patrocinado por Arbitrum.*
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+---
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+**Enlaces Clave:**
+* **Demo en Vivo:** `#`
+* **Video Pitch (3-4 min):** `#`
+* **Repositorio:** `#`
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
+---
 
-## Requirements
+## 1. El Problema: La Confianza en el Mundo Digital Está Rota
 
-Before you begin, you need to install the following tools:
+En la era de las redes sociales, nuestras conexiones son abundantes pero frágiles. Las plataformas están llenas de perfiles falsos, bots y "catfishing". Una interacción digital —un *like*, un *match*, un mensaje— carece de peso y verificación en el mundo real.
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+Esta desconexión crea un ecosistema de baja confianza donde es imposible distinguir las conexiones genuinas de las efímeras. Para DAOs, dApps y comunidades, esto se traduce en un problema masivo: los **ataques Sybil**, donde una sola persona con mil perfiles falsos puede simular una comunidad y explotar el sistema.
 
-## Quickstart
+## 2. Nuestra Solución: "Proof of Presence" - Prueba de Presencia Real
 
-To get started with Scaffold-ETH 2, follow the steps below:
+Sunny es un protocolo de identidad social que actúa como un puente entre el mundo físico y el digital. En lugar de basar la identidad en datos biométricos, la construimos sobre un pilar más humano: **las interacciones reales y verificadas**.
 
-1. Install dependencies if it was skipped in CLI:
+Creamos un sistema donde cada encuentro físico verificado entre dos personas se registra on-chain como un **Soulbound Token (SBT)** intransferible. Este SBT no es una simple imagen; es la primera pieza de una identidad digital que **evoluciona con la relación**, ganando niveles y reputación a medida que las interacciones continúan.
 
-```
-cd my-dapp-example
+Construimos un ciclo de valor donde la confianza no se asume, se demuestra.
+
+```mermaid
+graph TD
+    subgraph "Ciclo de Valor de Sunny"
+        A["1. Encuentro en el<br>Mundo Real"] --> B["2. Verificación Off-chain<br> (Oracle de Proximidad)"];
+        B --> C["3. Acuñación de SBTs<br>'Proof of Match' en Arbitrum"];
+        C --> D["4. Interacciones Continuas<br>y Verificadas"];
+        D --> E["5. SBT Evoluciona<br>On-Chain (Sube de Nivel)"];
+        E --> F["6. Se Desbloquean Funciones<br> RWA (Bóvedas)"];
+        F --> G["7. Se Construye Reputación<br> (Puntuación de Presencia)"];
+        G --> A;
+    end
+````
+
+## 3. La "Bóveda de Compromisos": Nuestro Diferenciador RWA Clave
+
+Verificar el pasado es solo el comienzo. El verdadero valor de Sunny reside en su capacidad para asegurar el futuro de una relación con valor del mundo real (RWA). Aquí es donde introducimos la **"Bóveda de Compromisos"**.
+
+* **El Activo (RWA):** Negocios locales (restaurantes, hoteles) tokenizan sus servicios como **"Experiencias-NFT"** en nuestro mercado. Un NFT puede representar una "Cena para dos" o un "Fin de semana en Punta del Este".
+* **La Promesa On-Chain:** Un usuario puede comprar una de estas Experiencias-NFT y depositarla en una "Bóveda de Compromisos", un smart contract que se crea para la pareja.
+* **La Confianza Programable:** El NFT queda bloqueado en la bóveda. Las reglas son inmutables:
+    1.  **Canje Conjunto:** Para usar la experiencia, **ambos** deben firmar la transacción.
+    2.  **Resolución de Disputas:** Si la relación termina, ambos pueden firmar para disolver el compromiso, y el NFT vuelve a quien lo compró.
+
+Ya no es un "te lo prometo". Es un **compromiso con seguridad contractual**, un gesto romántico asegurado por la blockchain de Arbitrum.
+
+---
+
+## 4. Arquitectura y Tech Stack
+
+Hemos diseñado una arquitectura modular y segura, separando las responsabilidades para maximizar la flexibilidad y minimizar los riesgos.
+
+```mermaid
+graph TD
+    subgraph "Cliente (Usuario en la App)"
+        A["Frontend: Next.js / wagmi"]
+    end
+
+    subgraph "Backend (Serverless)"
+        B["API + Oracle de Proximidad"]
+        C["Base de Datos (Supabase)"]
+    end
+
+    subgraph "Blockchain (Arbitrum)"
+        D["ProofOfMatch.sol<br>(Registro SBTs)"]
+        E["MatchData.sol<br>(Lógica de Niveles)"]
+        F["PresenceScore.sol<br>(Reputación Sybil)"]
+        G["CommitmentVaultFactory.sol<br>(Lógica RWA)"]
+        H["ExperienceNFT.sol<br>(Activo RWA)"]
+    end
+
+    A -- "Interacciones UI" --> B;
+    B -- "Verificación" --> B;
+    B -- "Llama a Contratos (Owner)" --> D;
+    B -- "Llama a Contratos (Owner)" --> E;
+    A -- "Lecturas Públicas" --> F;
+    A -- "Crear Bóveda" --> G;
+    D -- "Crea Entrada" --> E;
+    F -- "Lee Datos de" --> D;
+    F -- "Lee Datos de" --> E;
+    G -- "Lee Datos de" --> E;
+
+* **Frontend (`Next.js / Scaffold-ETH 2`):** Una PWA rápida y reactiva construida con wagmi para una interacción fluida con la blockchain.
+* **Backend (`Node.js / Serverless`):** Actúa como nuestro **oráculo de confianza**, verificando la proximidad de los usuarios antes de autorizar las transacciones on-chain.
+* **Blockchain (`Solidity / Arbitrum`):** Nuestra infraestructura de smart contracts vive en Arbitrum para garantizar transacciones rápidas y de bajo costo, esenciales para una aplicación social.
+    * **`ProofOfMatch.sol`**: El núcleo. Acuña los SBTs y asegura su intransferibilidad.
+    * **`MatchData.sol`**: El "cerebro" de la relación. Almacena los niveles y el número de interacciones.
+    * **`PresenceScore.sol`**: La capa de reputación. Lee los datos de los otros contratos para generar una puntuación anti-Sybil.
+    * **`ExperienceNFT.sol`**: El contrato RWA que representa un voucher o servicio del mundo real.
+    * **`CommitmentVaultFactory.sol`**: La fábrica que permite a los usuarios crear sus "promesas" on-chain.
+
+---
+
+### Flujo del Protocolo (MVP)
+
+Para entender cómo cada pieza de nuestra arquitectura cobra vida, aquí explicamos el flujo completo desde la perspectiva de cada actor involucrado. Este ciclo demuestra cómo transformamos eventos y derechos del mundo real en activos digitales verificables y funcionales.
+
+#### 🤵 **Actor 1: El Administrador/Oráculo del Protocolo (Backend)**
+
+El Administrador actúa como la fuente de verdad centralizada que conecta el mundo físico con la blockchain. Para la demo, este rol lo simulamos nosotros.
+
+1.  **Verificación de Encuentros:** Dos usuarios, Ana y Beto, se encuentran en el mundo real. Nuestro backend (el Oráculo) verifica su proximidad física a través de sus dispositivos.
+2.  **Creación del Match On-Chain:** Una vez verificado el encuentro, el Administrador llama a la función `createMatch()` en el contrato **`ProofOfMatch.sol`**.
+    * **Resultado:** Se acuñan dos SBTs (uno para Ana y otro para Beto) y se crea una entrada en el contrato **`MatchData.sol`** con `Nivel: 1`. La conexión inicial queda sellada e inmutable en Arbitrum.
+3.  **Registro de Interacciones:** Ana y Beto siguen interactuando. El Oráculo verifica estos nuevos encuentros y llama a `recordInteraction()` en **`MatchData.sol`**.
+    * **Resultado:** El `interactionCount` del match aumenta y, al alcanzar ciertos umbrales, el `level` del match sube a 2, y luego a 3. Su relación evoluciona on-chain.
+
+#### 🏨 **Actor 2: Los Negocios del Mundo Real (Socios RWA)**
+
+Los negocios locales son fundamentales para aportar valor tangible al ecosistema.
+
+1.  **Tokenización de Servicios:** Un hotel de Punta del Este utiliza nuestro sistema para desplegar su propio contrato **`ExperienceNFT.sol`**. Luego, llama a la función `mintExperience()` para crear un NFT que representa "Una Noche para Dos". Este NFT es un RWA: un derecho verificable a un servicio real.
+2.  **Venta en el Mercado:** El hotel pone a la venta este NFT en un mercado o directamente a sus clientes.
+
+#### 👩‍❤️‍👨 **Actor 3: Los Usuarios Finales (Ana y Beto)**
+
+Aquí es donde el protocolo demuestra su valor para la comunidad.
+
+1.  **Construcción de Reputación:** Ana y Beto, gracias a sus interacciones, ahora tienen un SBT de Nivel 3. Cualquier dApp puede consultar el contrato **`PresenceScore.sol`** para verificar su "Puntuación de Presencia", probando que son usuarios reales y socialmente activos. Esto les da acceso a airdrops más justos, mejor poder de voto en DAOs, etc.
+2.  **Adquisición del RWA:** Beto compra el NFT del hotel para sorprender a Ana. El NFT ahora está en la wallet de Beto.
+3.  **Creación del Compromiso On-Chain:** Beto llama a `createCommitmentVault()` en el contrato **`CommitmentVaultFactory.sol`**.
+    * **Verificación:** La fábrica primero consulta a **`MatchData.sol`** para confirmar que el match de Ana y Beto tiene al menos Nivel 2.
+    * **Resultado:** Se despliega un nuevo contrato **`CommitmentVault.sol`** que pertenece a ambos. El NFT del hotel se transfiere de la wallet de Beto y queda bloqueado dentro de esta nueva bóveda. La promesa ahora es un hecho verificable en la blockchain.
+4.  **Canje de la Experiencia:** Para su aniversario, Ana y Beto deciden usar la experiencia.
+    * **Acuerdo:** Ambos llaman a `approveRedemption()` desde sus respectivas wallets en su `CommitmentVault`.
+    * **Ejecución:** Uno de ellos llama a `executeRedemption()`. El contrato verifica ambas aprobaciones y les transfiere el NFT a su wallet.
+    * **Resultado Final:** Pueden presentar el NFT en el hotel para canjear su estancia. Han completado el ciclo completo, llevando un compromiso digital a una experiencia en el mundo real.
+
+---
+
+## 5. ✅ Checklist de Entregables del Hackathon
+
+| Item | Status |
+| :--- | :---: |
+| **Arquitectura Multi-Contrato** funcional desplegada en Arbitrum Sepolia | ✔︎ |
+| **Flujo de Acuñación de SBTs** basado en un oráculo simulado | ✔︎ |
+| **Lógica de SBTs Evolutivos** (Niveles) funcional | ✔︎ |
+| **Protocolo `PresenceScore`** para resistencia a Sybil | ✔︎ |
+| **Flujo RWA de "Bóveda de Compromisos"** funcional | ✔︎ |
+| **UI de prueba** para demostrar todo el flujo | ✔︎ |
+| **MVP** y `README.md` completo | ✔︎ |
+
+## 6. Modelo de Negocio y Valor RWA
+
+Sunny genera valor de tres formas:
+
+1.  **Comisión del Mercado de Experiencias:** Cobramos un pequeño porcentaje por cada Experiencia-NFT vendida por los negocios asociados.
+2.  **Fee por Creación de Bóvedas:** Un fee mínimo cada vez que un usuario crea una "Bóveda de Compromisos", un servicio de alto valor emocional y contractual.
+3.  **API de Presence Score (Futuro):** Licenciar el acceso a la Puntuación de Presencia a otros proyectos que necesiten una solución de resistencia a Sybil.
+
+Nuestra solución aporta **valor RWA real** al tokenizar dos cosas: **eventos pasados** (el match) y **derechos futuros** (la experiencia), creando un puente tangible entre las acciones de los usuarios en el mundo real y su capital social y financiero en el mundo digital.
+
+## 7. Plan de Crecimiento (Uso del Premio)
+
+#### **Prioridad #1: Oráculo Robusto (≥ $500)**
+* **Inversión:** Integración con APIs de verificación de localización (ej. Foursquare) y subsidio de gas inicial.
+* **Resultado:** Pasar de un oráculo simulado a uno robusto, aumentando la confianza y cubriendo las primeras 10,000 transacciones en Arbitrum.
+
+#### **Prioridad #2: Alianzas Comerciales (≥ $1,000)**
+* **Inversión:** Lo anterior + un fondo para incentivar a los primeros 10 negocios en unirse al Mercado de Experiencias.
+* **Resultado:** Crear un catálogo inicial de RWAs atractivos y demostrar el modelo de negocio.
+
+#### **Prioridad #3: Expansión del Ecosistema (1er Lugar)**
+* **Inversión:** Todo lo anterior + desarrollo de un SDK para que cualquier dApp en Arbitrum integre fácilmente el `PresenceScore`.
+* **Resultado:** Convertir a Sunny de una aplicación a una **capa de infraestructura de identidad** para todo el ecosistema.
+
+## 8. 🔨 Quick Start (Desarrollo Local)
+
+```bash
+# 1. Clonar el repositorio
+git clone <URL_DE_TU_REPO>
+cd <NOMBRE_DEL_PROYECTO>
+
+# 2. Instalar dependencias
 yarn install
-```
 
-2. Run a local network in the first terminal:
-
-```
+# 3. Iniciar la cadena local y desplegar contratos
 yarn chain
-```
-
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `packages/hardhat/hardhat.config.ts`.
-
-3. On a second terminal, deploy the test contract:
-
-```
 yarn deploy
-```
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
+# 4. Iniciar la aplicación de Next.js
 yarn start
-```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+## 9. 👥 Equipo
 
-Run smart contract test with `yarn hardhat:test`
-
-- Edit your smart contracts in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
+| Nombre | Rol | Github / Social |
+| :--- | :--- | :--- |
+| **Oscar Fonseca** | Full-Stack / Smart Contracts | [@edsphinx](https://github.com/edsphinx) |
+| **Claudia Gutierrez** | UI/UX / Frontend | [@Smiley](https://warpcast.com/smiley) |
 
 
-## Documentation
+## 10. ✍️ Licencia
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+MIT – ver `LICENSE`.
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+*Hecho con ♥ para ETH Uruguay y desplegado en Arbitrum.*
