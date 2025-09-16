@@ -28,6 +28,8 @@ Creamos un sistema donde cada encuentro físico verificado entre dos personas se
 Construimos un ciclo de valor donde la confianza no se asume, se demuestra.
 
 ```mermaid
+
+
 graph TD
     subgraph "Ciclo de Valor de Sunny"
         A["1. Encuentro en el<br>Mundo Real"] --> B["2. Verificación Off-chain<br> (Oracle de Proximidad)"];
@@ -38,7 +40,13 @@ graph TD
         F --> G["7. Se Construye Reputación<br> (Puntuación de Presencia)"];
         G --> A;
     end
-````
+
+
+```
+
+---
+
+### Sección 4: El Diferenciador RWA
 
 ## 3. La "Bóveda de Compromisos": Nuestro Diferenciador RWA Clave
 
@@ -59,6 +67,8 @@ Ya no es un "te lo prometo". Es un **compromiso con seguridad contractual**, un 
 Hemos diseñado una arquitectura modular y segura, separando las responsabilidades para maximizar la flexibilidad y minimizar los riesgos.
 
 ```mermaid
+
+
 graph TD
     subgraph "Cliente (Usuario en la App)"
         A["Frontend: Next.js / wagmi"]
@@ -88,6 +98,9 @@ graph TD
     F -- "Lee Datos de" --> E;
     G -- "Lee Datos de" --> E;
 
+
+```
+
 * **Frontend (`Next.js / Scaffold-ETH 2`):** Una PWA rápida y reactiva construida con wagmi para una interacción fluida con la blockchain.
 * **Backend (`Node.js / Serverless`):** Actúa como nuestro **oráculo de confianza**, verificando la proximidad de los usuarios antes de autorizar las transacciones on-chain.
 * **Blockchain (`Solidity / Arbitrum`):** Nuestra infraestructura de smart contracts vive en Arbitrum para garantizar transacciones rápidas y de bajo costo, esenciales para una aplicación social.
@@ -98,6 +111,8 @@ graph TD
     * **`CommitmentVaultFactory.sol`**: La fábrica que permite a los usuarios crear sus "promesas" on-chain.
 
 ---
+
+### Sección 6: Flujo del Protocolo
 
 ### Flujo del Protocolo (MVP)
 
@@ -189,6 +204,11 @@ yarn deploy
 # 4. Iniciar la aplicación de Next.js
 yarn start
 
+````
+
+---
+### Sección 11: Equipo y Licencia
+```markdown
 ## 9. 👥 Equipo
 
 | Nombre | Rol | Github / Social |
