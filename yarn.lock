@@ -14899,15 +14899,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"se-2@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "se-2@workspace:."
-  dependencies:
-    husky: ~9.1.6
-    lint-staged: ~13.2.2
-  languageName: unknown
-  linkType: soft
-
 "secp256k1@npm:^4.0.1":
   version: 4.0.4
   resolution: "secp256k1@npm:4.0.4"
@@ -15813,6 +15804,15 @@ __metadata:
   checksum: 879ad68e3e81adcf4373038aaafe55f968294955593660e173fbf679204aff158c59966716a60b29af72dc88795cfb2c479b6d2c3c87b2b2d282f3e27cc66461
   languageName: node
   linkType: hard
+
+"sunny-web3@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "sunny-web3@workspace:."
+  dependencies:
+    husky: ~9.1.6
+    lint-staged: ~13.2.2
+  languageName: unknown
+  linkType: soft
 
 "superstruct@npm:^1.0.3":
   version: 1.0.4
