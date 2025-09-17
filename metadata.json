@@ -1,0 +1,15 @@
+{
+  "name": "Sunny Experience Voucher",
+  "description": "Un voucher genérico que representa una experiencia o servicio del mundo real, canjeable a través del Protocolo Sunny. Este activo digital (RWA) certifica el derecho a una experiencia única.",
+  "image": "https://ipfs.io/ipfs/bafybeietvkaefqzrdxzx7gr4ozdtl4ye43e7kz2m53bv53hzrzhvdj3viq",
+  "attributes": [
+    {
+      "trait_type": "Tipo",
+      "value": "Experiencia RWA"
+    },
+    {
+      "trait_type": "Protocolo",
+      "value": "Sunny"
+    }
+  ]
+}

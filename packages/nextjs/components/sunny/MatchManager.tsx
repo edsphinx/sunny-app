@@ -2,15 +2,8 @@ import { useState } from "react";
 import { MatchLevel } from "./MatchLevel";
 import type { TransactionReceipt } from "viem";
 import { AddressInput } from "~~/components/scaffold-eth";
-import { useScaffoldEventHistory, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-
-type MatchCreatedEvent = {
-  args: {
-    matchId?: bigint;
-    userA?: string;
-    userB?: string;
-  };
-};
+import { useBackendWrite } from "~~/hooks/sunny/useBackendWrite";
+import { useSunnyHistory } from "~~/hooks/sunny/useSunnyHistory";
 
 const formatAddress = (addr = ""): string => `${addr.slice(0, 6)}...${addr.slice(-4)}`;
 
@@ -20,28 +13,46 @@ export const MatchManager = () => {
   const [location, setLocation] = useState("Mercado del Puerto, Montevideo");
   const [selectedMatchId, setSelectedMatchId] = useState("");
 
-  const { writeContractAsync: createMatch, isMining: isCreating } = useScaffoldWriteContract({
-    contractName: "ProofOfMatch",
-  });
+  const { writeContractAsync: createMatch, isMining: isCreating } = useBackendWrite("ProofOfMatch");
+  const { writeContractAsync: recordInteraction, isMining: isRecording } = useBackendWrite("MatchData");
 
-  const { writeContractAsync: recordInteraction, isMining: isRecording } = useScaffoldWriteContract({
-    contractName: "MatchData",
-  });
-
-  // @ts-ignore
-  const { data: createdMatches, isLoading: isLoadingMatches } = useScaffoldEventHistory({
+  /**
+   * @notice Carga el historial de eventos para los Matches creados.
+   * @dev Usa el hook optimizado 'useSunnyHistory' que busca eventos desde el bloque de
+   * despliegue del contrato para asegurar que se listen todos los eventos de forma eficiente.
+   * @todo Para una aplicación en producción reemplazar este mecanismo por una solución de indexación dedicada como Ponder.
+   */
+  const {
+    data: createdMatches,
+    isLoading: isLoadingMatches,
+    refetch: refetchMatches,
+  } = useSunnyHistory({
     contractName: "ProofOfMatch",
     eventName: "MatchCreated",
-    fromBlock: 0n,
-    watch: true,
   });
 
   const handleCreateMatch = async () => {
+    if (!userA || !userB) {
+      alert("Por favor, completa las direcciones de ambos usuarios.");
+      return;
+    }
     try {
-      await createMatch({
-        functionName: "createMatch",
-        args: [userA, userB, location],
-      });
+      await createMatch(
+        { functionName: "createMatch", args: [userA, userB, location] },
+        {
+          onBlockConfirmation: () => {
+            console.log("🤝 Match creado y confirmado! Iniciando actualización...");
+
+            setTimeout(() => {
+              console.log("🔄 Ejecutando refetch para actualizar la lista de Matches...");
+              refetchMatches();
+            }, 2000); // 2 segundos de espera
+
+            setUserA("");
+            setUserB("");
+          },
+        },
+      );
     } catch (e) {
       console.error("Error al crear el match:", e);
     }
@@ -50,13 +61,13 @@ export const MatchManager = () => {
   const handleRecordInteraction = async () => {
     try {
       await recordInteraction(
-        {
-          functionName: "recordInteraction",
-          args: [BigInt(selectedMatchId || 0)],
-        },
+        { functionName: "recordInteraction", args: [BigInt(selectedMatchId || 0)] },
         {
           onBlockConfirmation: (txnReceipt: TransactionReceipt) => {
-            console.log("⚡️ Interacción registrada!", txnReceipt.blockHash);
+            console.log("⚡️ Interacción registrada y confirmada!", txnReceipt.blockHash);
+            // Aunque el nivel se actualiza solo, refrescar la lista es una buena práctica
+            // por si en el futuro se añade más data que dependa de esto.
+            refetchMatches();
           },
         },
       );
@@ -86,7 +97,7 @@ export const MatchManager = () => {
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
           {isLoadingMatches && <span className="loading loading-spinner mx-auto"></span>}
           {/* Mapeamos los matches en orden inverso para mostrar el más reciente primero */}
-          {[...(createdMatches || [])].reverse().map((match: MatchCreatedEvent, index) => (
+          {[...(createdMatches || [])].reverse().map((match, index) => (
             <button
               key={index}
               className={`w-full text-left p-2 bg-base-200 rounded-lg hover:bg-base-300 border-2 ${

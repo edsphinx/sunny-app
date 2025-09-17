@@ -1,28 +1,29 @@
 import { useMemo, useState } from "react";
 import { Address } from "~~/components/scaffold-eth";
-import { useScaffoldEventHistory, useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useSunnyHistory } from "~~/hooks/sunny/useSunnyHistory";
 
 export const PresenceScoreChecker = () => {
   const [addressToCheck, setAddressToCheck] = useState("");
   const [selectedAddress, setSelectedAddress] = useState("");
 
-  const {
-    data: score,
-    refetch,
-    isFetching,
-  } = useScaffoldReadContract({
+  const { data: score, isFetching } = useScaffoldReadContract({
     contractName: "PresenceScore",
     functionName: "getPresenceScore",
     args: [addressToCheck],
-    query: { enabled: false },
+    query: {
+      enabled: addressToCheck !== "",
+    },
   });
 
-  // @ts-ignore
-  const { data: createdMatches, isLoading: isLoadingMatches } = useScaffoldEventHistory({
+  /**
+   * @notice Carga la lista de usuarios que han participado en matches.
+   * @dev Para este MVP, se hizo solo como una solución temporal.
+   * @todo Reemplazar este mecanismo por una solución de indexación.
+   */
+  const { data: createdMatches, isLoading: isLoadingMatches } = useSunnyHistory({
     contractName: "ProofOfMatch",
     eventName: "MatchCreated",
-    fromBlock: 0n,
-    watch: true,
   });
 
   const uniqueAddresses = useMemo(() => {
@@ -34,7 +35,6 @@ export const PresenceScoreChecker = () => {
   const handleCheckScore = (address: string) => {
     setAddressToCheck(address);
     setSelectedAddress(address);
-    setTimeout(() => refetch(), 100);
   };
 
   return (
@@ -46,12 +46,10 @@ export const PresenceScoreChecker = () => {
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2 mt-4">
           {isLoadingMatches && <span className="loading loading-spinner mx-auto"></span>}
           {uniqueAddresses.map((address, index) => (
-            // CAMBIO: Cambiamos <button> por <div> y le damos las clases de un botón.
             <div
               key={index}
               className={`btn btn-outline w-full justify-start ${selectedAddress === address ? "btn-active" : ""}`}
               onClick={() => handleCheckScore(address)}
-              // Añadimos role y tabIndex por accesibilidad
               role="button"
               tabIndex={0}
               onKeyDown={e => e.key === "Enter" && handleCheckScore(address)}

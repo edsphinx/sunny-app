@@ -2,8 +2,6 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
 @theme {
   --shadow-center: 0 0 12px -2px rgb(0 0 0 / 0.05);
   --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -15,50 +13,56 @@
     dark --prefersdark;
 }
 
+/* ==========================================================================
+   TEMA SUNNY - LIGHT
+   ========================================================================== */
 @plugin "daisyui/theme" {
   name: "light";
 
-  --color-primary: #93bbfb;
-  --color-primary-content: #212638;
-  --color-secondary: #dae8ff;
-  --color-secondary-content: #212638;
-  --color-accent: #93bbfb;
-  --color-accent-content: #212638;
-  --color-neutral: #212638;
-  --color-neutral-content: #ffffff;
-  --color-base-100: #ffffff;
-  --color-base-200: #f4f8ff;
-  --color-base-300: #dae8ff;
-  --color-base-content: #212638;
-  --color-info: #93bbfb;
-  --color-success: #34eeb6;
-  --color-warning: #ffcf72;
-  --color-error: #ff8863;
+  --color-primary: #f59e0b;              /* Sunny Orange */
+  --color-primary-content: #ffffff;      /* Texto blanco para buen contraste */
+  --color-secondary: #fbbf24;            /* Sunny Yellow */
+  --color-secondary-content: #1f2937;    /* Texto oscuro para buen contraste */
+  --color-accent: #3b82f6;               /* Un azul profesional como acento */
+  --color-accent-content: #ffffff;
+  --color-neutral: #1f2937;              /* Gris oscuro para elementos neutros */
+  --color-neutral-content: #f9fafb;      /* Texto claro */
+  --color-base-100: #ffffff;             /* Fondo principal - Blanco */
+  --color-base-200: #f9fafb;             /* Fondo secundario - Gris muy claro */
+  --color-base-300: #f3f4f6;             /* Fondo terciario - Gris claro */
+  --color-base-content: #111827;         /* Texto principal - Casi negro */
+  --color-info: #3b82f6;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
 
   --radius-field: 9999rem;
   --radius-box: 1rem;
   --tt-tailw: 6px;
 }
 
+/* ==========================================================================
+   TEMA SUNNY - DARK
+   ========================================================================== */
 @plugin "daisyui/theme" {
   name: "dark";
 
-  --color-primary: #212638;
-  --color-primary-content: #f9fbff;
-  --color-secondary: #323f61;
-  --color-secondary-content: #f9fbff;
-  --color-accent: #4969a6;
-  --color-accent-content: #f9fbff;
-  --color-neutral: #f9fbff;
-  --color-neutral-content: #385183;
-  --color-base-100: #385183;
-  --color-base-200: #2a3655;
-  --color-base-300: #212638;
-  --color-base-content: #f9fbff;
-  --color-info: #385183;
-  --color-success: #34eeb6;
-  --color-warning: #ffcf72;
-  --color-error: #ff8863;
+  --color-primary: #f59e0b;              /* Sunny Orange */
+  --color-primary-content: #111827;      /* Texto oscuro para buen contraste */
+  --color-secondary: #fbbf24;            /* Sunny Yellow */
+  --color-secondary-content: #111827;    /* Texto oscuro */
+  --color-accent: #60a5fa;               /* Azul de acento, más brillante para modo oscuro */
+  --color-accent-content: #111827;
+  --color-neutral: #d1d5db;              /* Gris claro para elementos neutros */
+  --color-neutral-content: #111827;      /* Texto oscuro */
+  --color-base-100: #111827;             /* Fondo principal - Casi negro */
+  --color-base-200: #1f2937;             /* Fondo secundario - Gris oscuro */
+  --color-base-300: #374151;             /* Fondo terciario - Gris más claro */
+  --color-base-content: #f9fafb;         /* Texto principal - Gris muy claro */
+  --color-info: #60a5fa;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
 
   --radius-field: 9999rem;
   --radius-box: 1rem;
@@ -67,21 +71,15 @@
   --tt-bg: var(--color-primary);
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+/* Estilos de compatibilidad y base (se mantienen) */
 @layer base {
   *,
   ::after,
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+    border-color: var(--color-base-300, currentColor);
   }
 
   p {
