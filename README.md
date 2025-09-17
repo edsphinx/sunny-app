@@ -13,6 +13,21 @@
 
 ---
 
+## Contratos Desplegados en Arbitrum Sepolia 🔗
+
+Todos los contratos del protocolo están desplegados y verificados en la red de pruebas Arbitrum Sepolia. Puedes revisar el código fuente verificado, leer el estado del contrato y ver todas las transacciones en los siguientes enlaces de Arbiscan:
+
+| Contrato | Dirección (Address) en Arbiscan | Descripción |
+| :--- | :--- | :--- |
+| **ProofOfMatch.sol** | [`0x88f9...1D14`](https://sepolia.arbiscan.io/address/0x88f9f78f8AD5Ac224ec48Fef7F345299e7411D14) | El núcleo del protocolo. Acuña los SBTs de "Prueba de Conexión". |
+| **MatchData.sol** | [`0x87DF...2643`](https://sepolia.arbiscan.io/address/0x87DFa5646f097F52448A93f273AB835974d72643) | Almacena y gestiona los datos evolutivos de cada conexión (niveles, interacciones). |
+| **PresenceScore.sol** | [`0x92e0...8324`](https://sepolia.arbiscan.io/address/0x92e04D680232dA68E1086B4D6E4a336533138324) | Calcula la Puntuación de Presencia para la reputación on-chain y resistencia a Sybil. |
+| **CommitmentVaultFactory.sol**| [`0xB6eD...4c8`](https://sepolia.arbiscan.io/address/0xB6eD305e9a5F91E02184c8504bEAdF581C41C4c8) | Fábrica que crea las "Bóvedas de Compromiso" para asegurar las recompensas RWA. |
+| **ExperienceNFT.sol** | [`0x4A04...8aDc`](https://sepolia.arbiscan.io/address/0x4A0466Bc28b54FB3cB7c1a4A91cc5a8895f58aDc) | Ejemplo de un contrato RWA que tokeniza un servicio (voucher) de un negocio. |
+| **CommitmentVault.sol** | [`0x99d7...b407`](https://sepolia.arbiscan.io/address/0x99d73a610cf18C55a28b609034c7B40594D0b407) | Instancia 'plantilla' desplegada para que el frontend pueda acceder al ABI e interactuar con las bóvedas dinámicas. |
+
+---
+
 ## 1. El Problema: La Confianza en el Mundo Digital Está Rota
 
 En la era de las redes sociales, nuestras conexiones son abundantes pero frágiles. Las plataformas están llenas de perfiles falsos, bots y "catfishing". Una interacción digital —un *like*, un *match*, un mensaje— carece de peso y verificación en el mundo real.
@@ -214,11 +229,11 @@ yarn start
 | Nombre | Rol | Github / Social |
 | :--- | :--- | :--- |
 | **Oscar Fonseca** | Full-Stack / Smart Contracts | [@edsphinx](https://github.com/edsphinx) |
-| **Claudia Gutierrez** | UI/UX / Frontend | [@Smiley](https://warpcast.com/smiley) |
+| **Claudia Gutierrez** | UI/UX / Frontend | [@Smiley](https://github.com/22lolo) |
 
 
 ## 10. ✍️ Licencia
 
 MIT – ver `LICENSE`.
 
-*Hecho con ♥ para ETH Uruguay y desplegado en Arbitrum.*
+*Hecho con ♥ para ETH Uruguay 2025 y desplegado en Arbitrum.*
