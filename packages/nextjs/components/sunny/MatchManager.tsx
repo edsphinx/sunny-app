@@ -10,18 +10,12 @@ const formatAddress = (addr = ""): string => `${addr.slice(0, 6)}...${addr.slice
 export const MatchManager = () => {
   const [userA, setUserA] = useState("");
   const [userB, setUserB] = useState("");
-  const [location, setLocation] = useState("Mercado del Puerto, Montevideo");
+  const [location, setLocation] = useState("Week 4 Check-in");
   const [selectedMatchId, setSelectedMatchId] = useState("");
 
   const { writeContractAsync: createMatch, isMining: isCreating } = useBackendWrite("ProofOfMatch");
   const { writeContractAsync: recordInteraction, isMining: isRecording } = useBackendWrite("MatchData");
 
-  /**
-   * @notice Carga el historial de eventos para los Matches creados.
-   * @dev Usa el hook optimizado 'useSunnyHistory' que busca eventos desde el bloque de
-   * despliegue del contrato para asegurar que se listen todos los eventos de forma eficiente.
-   * @todo Para una aplicación en producción reemplazar este mecanismo por una solución de indexación dedicada como Ponder.
-   */
   const {
     data: createdMatches,
     isLoading: isLoadingMatches,
@@ -33,7 +27,7 @@ export const MatchManager = () => {
 
   const handleCreateMatch = async () => {
     if (!userA || !userB) {
-      alert("Por favor, completa las direcciones de ambos usuarios.");
+      alert("Please fill in the addresses for both users.");
       return;
     }
     try {
@@ -41,10 +35,10 @@ export const MatchManager = () => {
         { functionName: "createMatch", args: [userA, userB, location] },
         {
           onBlockConfirmation: () => {
-            console.log("🤝 Match creado y confirmado! Iniciando actualización...");
+            console.log("🤝 Match created and confirmed! Initiating refresh...");
 
             setTimeout(() => {
-              console.log("🔄 Ejecutando refetch para actualizar la lista de Matches...");
+              console.log("🔄 Fetching new match list...");
               refetchMatches();
             }, 2000); // 2 segundos de espera
 
@@ -54,7 +48,7 @@ export const MatchManager = () => {
         },
       );
     } catch (e) {
-      console.error("Error al crear el match:", e);
+      console.error("Error creating match:", e);
     }
   };
 
@@ -64,25 +58,23 @@ export const MatchManager = () => {
         { functionName: "recordInteraction", args: [BigInt(selectedMatchId || 0)] },
         {
           onBlockConfirmation: (txnReceipt: TransactionReceipt) => {
-            console.log("⚡️ Interacción registrada y confirmada!", txnReceipt.blockHash);
-            // Aunque el nivel se actualiza solo, refrescar la lista es una buena práctica
-            // por si en el futuro se añade más data que dependa de esto.
+            console.log("⚡️ Interaction recorded and confirmed!", txnReceipt.blockHash);
             refetchMatches();
           },
         },
       );
     } catch (e) {
-      console.error("Error al registrar la interacción:", e);
+      console.error("Error recording interaction:", e);
     }
   };
 
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
-        <h2 className="card-title">2. Backend: Gestionar Matches</h2>
-        <div className="divider">Crear Match</div>
-        <AddressInput value={userA} onChange={setUserA} placeholder="Dirección Usuario A" />
-        <AddressInput value={userB} onChange={setUserB} placeholder="Dirección Usuario B" />
+        <h2 className="card-title">Clinic: Manage Interactions</h2>
+        <div className="divider">Verify Clinical Visit</div>
+        <AddressInput value={userA} onChange={setUserA} placeholder="Patient Address" />
+        <AddressInput value={userB} onChange={setUserB} placeholder="Clinic/Institution Address" />
         <input
           type="text"
           className="input input-bordered mt-2"
@@ -90,13 +82,12 @@ export const MatchManager = () => {
           onChange={e => setLocation(e.target.value)}
         />
         <button className="btn btn-secondary mt-2" onClick={handleCreateMatch} disabled={isCreating}>
-          {isCreating ? <span className="loading loading-spinner"></span> : "Crear Match"}
+          {isCreating ? <span className="loading loading-spinner"></span> : "Verify Visit"}
         </button>
 
-        <div className="divider">Matches Creados</div>
+        <div className="divider">Verified Interactions</div>
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
           {isLoadingMatches && <span className="loading loading-spinner mx-auto"></span>}
-          {/* Mapeamos los matches en orden inverso para mostrar el más reciente primero */}
           {[...(createdMatches || [])].reverse().map((match, index) => (
             <button
               key={index}
@@ -107,22 +98,21 @@ export const MatchManager = () => {
             >
               <div className="flex justify-between items-center">
                 <p className="text-sm font-mono flex items-center">
-                  <b>Match ID:</b> {match.args.matchId?.toString()}
+                  <b>Interaction ID:</b> {match.args.matchId?.toString()}
                 </p>
-                {/* Usamos el componente auxiliar para mostrar el nivel actualizado */}
                 {match.args.matchId !== undefined && <MatchLevel matchId={match.args.matchId} />}
               </div>
               <p className="text-xs">
-                <b>Participantes:</b> {formatAddress(match.args.userA)} & {formatAddress(match.args.userB)}
+                <b>Participants:</b> {formatAddress(match.args.userA)} & {formatAddress(match.args.userB)}
               </p>
             </button>
           ))}
         </div>
 
-        <div className="divider">Registrar Interacción (Sube de Nivel)</div>
+        <div className="divider">Log Follow-up (Increases Compliance)</div>
         <input
           type="text"
-          placeholder="Haz clic en un match de la lista"
+          placeholder="Click an interaction from the list above"
           className="input input-bordered"
           value={selectedMatchId}
           readOnly
@@ -132,7 +122,7 @@ export const MatchManager = () => {
           onClick={handleRecordInteraction}
           disabled={isRecording || !selectedMatchId}
         >
-          {isRecording ? <span className="loading loading-spinner"></span> : "Confirmar Interacción"}
+          {isRecording ? <span className="loading loading-spinner"></span> : "Confirm Interaction"}
         </button>
       </div>
     </div>
