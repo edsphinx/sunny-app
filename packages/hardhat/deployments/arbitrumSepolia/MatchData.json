@@ -1,0 +1,417 @@
+{
+  "address": "0x87DFa5646f097F52448A93f273AB835974d72643",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_proofOfMatchAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_ownerAddress",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "matchId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "newLevel",
+          "type": "uint8"
+        }
+      ],
+      "name": "MatchUpgraded",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_matchId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_userA",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_userB",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_locationHint",
+          "type": "string"
+        }
+      ],
+      "name": "createMatchEntry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_matchId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getMatchDetails",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "userA",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "userB",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            },
+            {
+              "internalType": "string",
+              "name": "locationHint",
+              "type": "string"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint16",
+              "name": "interactionCount",
+              "type": "uint16"
+            }
+          ],
+          "internalType": "struct IMatchData.Match",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "matches",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "userA",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "userB",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "locationHint",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "level",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint16",
+          "name": "interactionCount",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "proofOfMatchContract",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_matchId",
+          "type": "uint256"
+        }
+      ],
+      "name": "recordInteraction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xc7c6acf259c36dc68187e283e8aaa61a5a9f4eb8d915b68607d709854457a43c",
+  "receipt": {
+    "to": null,
+    "from": "0xf5Ac0b87325Bf1B3Eee525EB9646faFD69D2FedC",
+    "contractAddress": "0x87DFa5646f097F52448A93f273AB835974d72643",
+    "transactionIndex": 1,
+    "gasUsed": "639636",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x90d94ce3f62bd915eefedd70bdac5df161696ef723ecdef37aa2b8af812cc846",
+    "transactionHash": "0xc7c6acf259c36dc68187e283e8aaa61a5a9f4eb8d915b68607d709854457a43c",
+    "logs": [],
+    "blockNumber": 195007280,
+    "cumulativeGasUsed": "639636",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x88f9f78f8AD5Ac224ec48Fef7F345299e7411D14",
+    "0xf5Ac0b87325Bf1B3Eee525EB9646faFD69D2FedC"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "33cb716f3c7232314a0055ce24e358a4",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_proofOfMatchAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_ownerAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"matchId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"newLevel\",\"type\":\"uint8\"}],\"name\":\"MatchUpgraded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_matchId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"_userA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_userB\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_locationHint\",\"type\":\"string\"}],\"name\":\"createMatchEntry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_matchId\",\"type\":\"uint256\"}],\"name\":\"getMatchDetails\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"userB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"locationHint\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"level\",\"type\":\"uint8\"},{\"internalType\":\"uint16\",\"name\":\"interactionCount\",\"type\":\"uint16\"}],\"internalType\":\"struct IMatchData.Match\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"matches\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"userA\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"userB\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"locationHint\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"level\",\"type\":\"uint8\"},{\"internalType\":\"uint16\",\"name\":\"interactionCount\",\"type\":\"uint16\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proofOfMatchContract\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_matchId\",\"type\":\"uint256\"}],\"name\":\"recordInteraction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"edsphinx\",\"details\":\"Separa la l\\u00f3gica de datos de la l\\u00f3gica de tokens (SBT) para mayor seguridad y flexibilidad.\",\"events\":{\"MatchUpgraded(uint256,uint8)\":{\"params\":{\"matchId\":\"El ID del match que fue actualizado.\",\"newLevel\":\"El nuevo nivel alcanzado.\"}}},\"kind\":\"dev\",\"methods\":{\"constructor\":{\"details\":\"Al desplegar, se establecen las direcciones inmutables del contrato de SBTs y del due\\u00f1o.\"},\"createMatchEntry(uint256,address,address,string)\":{\"details\":\"La seguridad se garantiza requiriendo que `msg.sender` sea el contrato ProofOfMatch.\",\"params\":{\"_locationHint\":\"Una pista no sensible sobre la ubicaci\\u00f3n del match.\",\"_matchId\":\"El ID \\u00fanico del match a crear.\",\"_userA\":\"La direcci\\u00f3n del usuario A.\",\"_userB\":\"La direcci\\u00f3n del usuario B.\"}},\"getMatchDetails(uint256)\":{\"params\":{\"_matchId\":\"El ID del match a consultar.\"},\"returns\":{\"_0\":\"La estructura completa del Match con todos sus datos.\"}},\"recordInteraction(uint256)\":{\"details\":\"La seguridad se garantiza con el modificador onlyOwner. La l\\u00f3gica de niveles puede ser ajustada aqu\\u00ed en futuras versiones.\",\"params\":{\"_matchId\":\"El ID del match a actualizar.\"}}},\"title\":\"Match Data\",\"version\":1},\"userdoc\":{\"events\":{\"MatchUpgraded(uint256,uint8)\":{\"notice\":\"Se emite cuando un match sube de nivel tras una nueva interacci\\u00f3n.\"}},\"kind\":\"user\",\"methods\":{\"createMatchEntry(uint256,address,address,string)\":{\"notice\":\"Crea la entrada de datos inicial para un nuevo match.\"},\"getMatchDetails(uint256)\":{\"notice\":\"Obtiene todos los detalles de un match espec\\u00edfico.\"},\"matches(uint256)\":{\"notice\":\"Mapeo de ID de match a sus datos detallados.\"},\"owner()\":{\"notice\":\"La direcci\\u00f3n del due\\u00f1o del protocolo (backend), autorizado para registrar interacciones.\"},\"proofOfMatchContract()\":{\"notice\":\"La direcci\\u00f3n del contrato ProofOfMatch principal.\"},\"recordInteraction(uint256)\":{\"notice\":\"Registra una nueva interacci\\u00f3n para un match existente, potencialmente subi\\u00e9ndolo de nivel.\"}},\"notice\":\"Contrato para almacenar y gestionar los datos din\\u00e1micos de los matches, como el nivel y el n\\u00famero de interacciones.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Sunny/MatchData.sol\":\"MatchData\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Sunny/IMatchData.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.24;\\n\\n/**\\n * @title IMatchData Interface\\n * @author edsphinx\\n * @dev Define la interfaz para el contrato que almacena y gestiona los datos\\n * de los matches, como niveles e interacciones.\\n */\\ninterface IMatchData {\\n    /**\\n     * @dev Estructura que almacena toda la informaci\\u00f3n de un match.\\n     */\\n    struct Match {\\n        address userA;\\n        address userB;\\n        uint256 timestamp;\\n        string locationHint;\\n        uint8 level;\\n        uint16 interactionCount;\\n    }\\n\\n    /**\\n     * @notice Se emite cuando un match sube de nivel tras una nueva interacci\\u00f3n.\\n     * @param matchId El ID del match que fue actualizado.\\n     * @param newLevel El nuevo nivel alcanzado.\\n     */\\n    event MatchUpgraded(uint256 indexed matchId, uint8 newLevel);\\n\\n    /**\\n     * @notice Crea la entrada de datos inicial para un nuevo match.\\n     * @dev Debe ser llamado \\u00fanicamente por el contrato ProofOfMatch.\\n     * @param _matchId El ID \\u00fanico del match a crear.\\n     * @param _userA La direcci\\u00f3n del usuario A.\\n     * @param _userB La direcci\\u00f3n del usuario B.\\n     * @param _locationHint Una pista no sensible sobre la ubicaci\\u00f3n del match.\\n     */\\n    function createMatchEntry(uint256 _matchId, address _userA, address _userB, string memory _locationHint) external;\\n\\n    /**\\n     * @notice Registra una nueva interacci\\u00f3n para un match existente, potencialmente subi\\u00e9ndolo de nivel.\\n     * @dev Debe ser llamado \\u00fanicamente por el due\\u00f1o del protocolo (backend).\\n     * @param _matchId El ID del match a actualizar.\\n     */\\n    function recordInteraction(uint256 _matchId) external;\\n\\n    /**\\n     * @notice Obtiene todos los detalles de un match espec\\u00edfico.\\n     * @param _matchId El ID del match a consultar.\\n     * @return La estructura completa del Match con todos sus datos.\\n     */\\n    function getMatchDetails(uint256 _matchId) external view returns (Match memory);\\n}\\n\",\"keccak256\":\"0x15ffce546f611a9c2517fc2226bef85aa48dfbac39ef247c5a65152e431473b8\",\"license\":\"MIT\"},\"contracts/Sunny/MatchData.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.24;\\n\\nimport { IMatchData } from \\\"./IMatchData.sol\\\";\\n\\n/**\\n * @title Match Data\\n * @author edsphinx\\n * @notice Contrato para almacenar y gestionar los datos din\\u00e1micos de los matches,\\n * como el nivel y el n\\u00famero de interacciones.\\n * @dev Separa la l\\u00f3gica de datos de la l\\u00f3gica de tokens (SBT) para mayor\\n * seguridad y flexibilidad.\\n */\\ncontract MatchData is IMatchData {\\n    /**\\n     * @notice La direcci\\u00f3n del contrato ProofOfMatch principal.\\n     */\\n    address public proofOfMatchContract;\\n    /**\\n     * @notice La direcci\\u00f3n del due\\u00f1o del protocolo (backend), autorizado para registrar interacciones.\\n     */\\n    address public owner;\\n\\n    /**\\n     * @notice Mapeo de ID de match a sus datos detallados.\\n     */\\n    mapping(uint256 => Match) public matches;\\n\\n    /**\\n     * @dev Modificador para restringir funciones solo al due\\u00f1o del protocolo.\\n     */\\n    modifier onlyOwner() {\\n        require(msg.sender == owner, \\\"Not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Al desplegar, se establecen las direcciones inmutables del contrato de SBTs y del due\\u00f1o.\\n     */\\n    constructor(address _proofOfMatchAddress, address _ownerAddress) {\\n        proofOfMatchContract = _proofOfMatchAddress;\\n        owner = _ownerAddress;\\n    }\\n\\n    /**\\n     * @inheritdoc IMatchData\\n     * @dev La seguridad se garantiza requiriendo que `msg.sender` sea el contrato ProofOfMatch.\\n     */\\n    function createMatchEntry(\\n        uint256 _matchId,\\n        address _userA,\\n        address _userB,\\n        string memory _locationHint\\n    ) external override {\\n        // Solo el contrato ProofOfMatch puede llamar esta funci\\u00f3n\\n        require(msg.sender == proofOfMatchContract, \\\"Only ProofOfMatch can create entries\\\");\\n\\n        matches[_matchId] = Match({\\n            userA: _userA,\\n            userB: _userB,\\n            timestamp: block.timestamp,\\n            locationHint: _locationHint,\\n            level: 1,\\n            interactionCount: 1\\n        });\\n    }\\n\\n    /**\\n     * @inheritdoc IMatchData\\n     * @dev La seguridad se garantiza con el modificador onlyOwner.\\n     * La l\\u00f3gica de niveles puede ser ajustada aqu\\u00ed en futuras versiones.\\n     */\\n    function recordInteraction(uint256 _matchId) external override onlyOwner {\\n        Match storage matchToUpdate = matches[_matchId];\\n        require(matchToUpdate.timestamp != 0, \\\"Match does not exist\\\");\\n\\n        matchToUpdate.interactionCount++;\\n\\n        uint8 oldLevel = matchToUpdate.level;\\n        if (matchToUpdate.interactionCount >= 5) {\\n            matchToUpdate.level = 3;\\n        } else if (matchToUpdate.interactionCount >= 3) {\\n            matchToUpdate.level = 2;\\n        }\\n\\n        if (oldLevel != matchToUpdate.level) {\\n            emit MatchUpgraded(_matchId, matchToUpdate.level);\\n        }\\n    }\\n\\n    /**\\n     * @inheritdoc IMatchData\\n     */\\n    function getMatchDetails(uint256 _matchId) external view override returns (Match memory) {\\n        return matches[_matchId];\\n    }\\n}\\n\",\"keccak256\":\"0xbf48240c1b9642f08ac1a2fb8fed715320abd67e15d53e646f8cf34397106d40\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50604051610a73380380610a7383398101604081905261002f9161007c565b600080546001600160a01b039384166001600160a01b031991821617909155600180549290931691161790556100af565b80516001600160a01b038116811461007757600080fd5b919050565b6000806040838503121561008f57600080fd5b61009883610060565b91506100a660208401610060565b90509250929050565b6109b5806100be6000396000f3fe608060405234801561001057600080fd5b50600436106100625760003560e01c80632df5d126146100675780634768d4ef1461009057806347f6702c146100b55780638da5cb5b146100e0578063a094bb24146100f3578063cdace01314610108575b600080fd5b61007a6100753660046105d9565b61011b565b6040516100879190610638565b60405180910390f35b6100a361009e3660046105d9565b610248565b604051610087969594939291906106a5565b6000546100c8906001600160a01b031681565b6040516001600160a01b039091168152602001610087565b6001546100c8906001600160a01b031681565b6101066101013660046105d9565b61031d565b005b61010661011636600461072a565b6104a4565b6040805160c0810182526000808252602082018190529181018290526060808201526080810182905260a0810191909152600082815260026020818152604092839020835160c08101855281546001600160a01b0390811682526001830154169281019290925291820154928101929092526003810180546060840191906101a290610806565b80601f01602080910402602001604051908101604052809291908181526020018280546101ce90610806565b801561021b5780601f106101f05761010080835404028352916020019161021b565b820191906000526020600020905b8154815290600101906020018083116101fe57829003601f168201915b50505091835250506004919091015460ff81166020830152610100900461ffff1660409091015292915050565b600260208190526000918252604090912080546001820154928201546003830180546001600160a01b039384169590931693919261028590610806565b80601f01602080910402602001604051908101604052809291908181526020018280546102b190610806565b80156102fe5780601f106102d3576101008083540402835291602001916102fe565b820191906000526020600020905b8154815290600101906020018083116102e157829003601f168201915b5050506004909301549192505060ff81169061ffff6101009091041686565b6001546001600160a01b0316331461036c5760405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b60448201526064015b60405180910390fd5b60008181526002602081905260408220908101549091036103c65760405162461bcd60e51b815260206004820152601460248201527313585d18da08191bd95cc81b9bdd08195e1a5cdd60621b6044820152606401610363565b600481018054610100900461ffff169060016103e183610840565b825461ffff91821661010093840a9081029083021990911617909255600484015460ff811693506005919004909116106104295760048201805460ff1916600317905561044f565b6004820154600361010090910461ffff161061044f5760048201805460ff191660021790555b600482015460ff82811691161461049f57600482015460405160ff909116815283907ff175b9a2136d23e3ddfed6c83eab4245517de6ed65350ed767ca377b32367bfd9060200160405180910390a25b505050565b6000546001600160a01b0316331461050a5760405162461bcd60e51b8152602060048201526024808201527f4f6e6c792050726f6f664f664d617463682063616e2063726561746520656e746044820152637269657360e01b6064820152608401610363565b6040805160c0810182526001600160a01b0385811682528481166020808401918252428486019081526060850187815260016080870181905260a0870181905260008c815260029485905297909720865181546001600160a01b0319908116918816919091178255945197810180549095169790951696909617909255905190820155915190919060038201906105a190826108bf565b5060808201516004909101805460a09093015161ffff166101000262ffffff1990931660ff9092169190911791909117905550505050565b6000602082840312156105eb57600080fd5b5035919050565b6000815180845260005b81811015610618576020818501810151868301820152016105fc565b506000602082860101526020601f19601f83011685010191505092915050565b60208152600060018060a01b038084511660208401528060208501511660408401525060408301516060830152606083015160c0608084015261067e60e08401826105f2565b905060ff60808501511660a084015261ffff60a08501511660c08401528091505092915050565b6001600160a01b038781168252861660208201526040810185905260c0606082018190526000906106d8908301866105f2565b905060ff8416608083015261ffff831660a0830152979650505050505050565b80356001600160a01b038116811461070f57600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b6000806000806080858703121561074057600080fd5b84359350610750602086016106f8565b925061075e604086016106f8565b9150606085013567ffffffffffffffff8082111561077b57600080fd5b818701915087601f83011261078f57600080fd5b8135818111156107a1576107a1610714565b604051601f8201601f19908116603f011681019083821181831017156107c9576107c9610714565b816040528281528a60208487010111156107e257600080fd5b82602086016020830137600060208483010152809550505050505092959194509250565b600181811c9082168061081a57607f821691505b60208210810361083a57634e487b7160e01b600052602260045260246000fd5b50919050565b600061ffff80831681810361086557634e487b7160e01b600052601160045260246000fd5b6001019392505050565b601f82111561049f576000816000526020600020601f850160051c810160208610156108985750805b601f850160051c820191505b818110156108b7578281556001016108a4565b505050505050565b815167ffffffffffffffff8111156108d9576108d9610714565b6108ed816108e78454610806565b8461086f565b602080601f831160018114610922576000841561090a5750858301515b600019600386901b1c1916600185901b1785556108b7565b600085815260208120601f198616915b8281101561095157888601518255948401946001909101908401610932565b508582101561096f5787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea26469706673582212204315987d5d21ff00a1b48e18c1bfaa598d9170668d31b5890a6666bc3d53a23d64736f6c63430008180033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100625760003560e01c80632df5d126146100675780634768d4ef1461009057806347f6702c146100b55780638da5cb5b146100e0578063a094bb24146100f3578063cdace01314610108575b600080fd5b61007a6100753660046105d9565b61011b565b6040516100879190610638565b60405180910390f35b6100a361009e3660046105d9565b610248565b604051610087969594939291906106a5565b6000546100c8906001600160a01b031681565b6040516001600160a01b039091168152602001610087565b6001546100c8906001600160a01b031681565b6101066101013660046105d9565b61031d565b005b61010661011636600461072a565b6104a4565b6040805160c0810182526000808252602082018190529181018290526060808201526080810182905260a0810191909152600082815260026020818152604092839020835160c08101855281546001600160a01b0390811682526001830154169281019290925291820154928101929092526003810180546060840191906101a290610806565b80601f01602080910402602001604051908101604052809291908181526020018280546101ce90610806565b801561021b5780601f106101f05761010080835404028352916020019161021b565b820191906000526020600020905b8154815290600101906020018083116101fe57829003601f168201915b50505091835250506004919091015460ff81166020830152610100900461ffff1660409091015292915050565b600260208190526000918252604090912080546001820154928201546003830180546001600160a01b039384169590931693919261028590610806565b80601f01602080910402602001604051908101604052809291908181526020018280546102b190610806565b80156102fe5780601f106102d3576101008083540402835291602001916102fe565b820191906000526020600020905b8154815290600101906020018083116102e157829003601f168201915b5050506004909301549192505060ff81169061ffff6101009091041686565b6001546001600160a01b0316331461036c5760405162461bcd60e51b815260206004820152600d60248201526c2737ba103a34329037bbb732b960991b60448201526064015b60405180910390fd5b60008181526002602081905260408220908101549091036103c65760405162461bcd60e51b815260206004820152601460248201527313585d18da08191bd95cc81b9bdd08195e1a5cdd60621b6044820152606401610363565b600481018054610100900461ffff169060016103e183610840565b825461ffff91821661010093840a9081029083021990911617909255600484015460ff811693506005919004909116106104295760048201805460ff1916600317905561044f565b6004820154600361010090910461ffff161061044f5760048201805460ff191660021790555b600482015460ff82811691161461049f57600482015460405160ff909116815283907ff175b9a2136d23e3ddfed6c83eab4245517de6ed65350ed767ca377b32367bfd9060200160405180910390a25b505050565b6000546001600160a01b0316331461050a5760405162461bcd60e51b8152602060048201526024808201527f4f6e6c792050726f6f664f664d617463682063616e2063726561746520656e746044820152637269657360e01b6064820152608401610363565b6040805160c0810182526001600160a01b0385811682528481166020808401918252428486019081526060850187815260016080870181905260a0870181905260008c815260029485905297909720865181546001600160a01b0319908116918816919091178255945197810180549095169790951696909617909255905190820155915190919060038201906105a190826108bf565b5060808201516004909101805460a09093015161ffff166101000262ffffff1990931660ff9092169190911791909117905550505050565b6000602082840312156105eb57600080fd5b5035919050565b6000815180845260005b81811015610618576020818501810151868301820152016105fc565b506000602082860101526020601f19601f83011685010191505092915050565b60208152600060018060a01b038084511660208401528060208501511660408401525060408301516060830152606083015160c0608084015261067e60e08401826105f2565b905060ff60808501511660a084015261ffff60a08501511660c08401528091505092915050565b6001600160a01b038781168252861660208201526040810185905260c0606082018190526000906106d8908301866105f2565b905060ff8416608083015261ffff831660a0830152979650505050505050565b80356001600160a01b038116811461070f57600080fd5b919050565b634e487b7160e01b600052604160045260246000fd5b6000806000806080858703121561074057600080fd5b84359350610750602086016106f8565b925061075e604086016106f8565b9150606085013567ffffffffffffffff8082111561077b57600080fd5b818701915087601f83011261078f57600080fd5b8135818111156107a1576107a1610714565b604051601f8201601f19908116603f011681019083821181831017156107c9576107c9610714565b816040528281528a60208487010111156107e257600080fd5b82602086016020830137600060208483010152809550505050505092959194509250565b600181811c9082168061081a57607f821691505b60208210810361083a57634e487b7160e01b600052602260045260246000fd5b50919050565b600061ffff80831681810361086557634e487b7160e01b600052601160045260246000fd5b6001019392505050565b601f82111561049f576000816000526020600020601f850160051c810160208610156108985750805b601f850160051c820191505b818110156108b7578281556001016108a4565b505050505050565b815167ffffffffffffffff8111156108d9576108d9610714565b6108ed816108e78454610806565b8461086f565b602080601f831160018114610922576000841561090a5750858301515b600019600386901b1c1916600185901b1785556108b7565b600085815260208120601f198616915b8281101561095157888601518255948401946001909101908401610932565b508582101561096f5787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea26469706673582212204315987d5d21ff00a1b48e18c1bfaa598d9170668d31b5890a6666bc3d53a23d64736f6c63430008180033",
+  "devdoc": {
+    "author": "edsphinx",
+    "details": "Separa la lógica de datos de la lógica de tokens (SBT) para mayor seguridad y flexibilidad.",
+    "events": {
+      "MatchUpgraded(uint256,uint8)": {
+        "params": {
+          "matchId": "El ID del match que fue actualizado.",
+          "newLevel": "El nuevo nivel alcanzado."
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "details": "Al desplegar, se establecen las direcciones inmutables del contrato de SBTs y del dueño."
+      },
+      "createMatchEntry(uint256,address,address,string)": {
+        "details": "La seguridad se garantiza requiriendo que `msg.sender` sea el contrato ProofOfMatch.",
+        "params": {
+          "_locationHint": "Una pista no sensible sobre la ubicación del match.",
+          "_matchId": "El ID único del match a crear.",
+          "_userA": "La dirección del usuario A.",
+          "_userB": "La dirección del usuario B."
+        }
+      },
+      "getMatchDetails(uint256)": {
+        "params": {
+          "_matchId": "El ID del match a consultar."
+        },
+        "returns": {
+          "_0": "La estructura completa del Match con todos sus datos."
+        }
+      },
+      "recordInteraction(uint256)": {
+        "details": "La seguridad se garantiza con el modificador onlyOwner. La lógica de niveles puede ser ajustada aquí en futuras versiones.",
+        "params": {
+          "_matchId": "El ID del match a actualizar."
+        }
+      }
+    },
+    "title": "Match Data",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "MatchUpgraded(uint256,uint8)": {
+        "notice": "Se emite cuando un match sube de nivel tras una nueva interacción."
+      }
+    },
+    "kind": "user",
+    "methods": {
+      "createMatchEntry(uint256,address,address,string)": {
+        "notice": "Crea la entrada de datos inicial para un nuevo match."
+      },
+      "getMatchDetails(uint256)": {
+        "notice": "Obtiene todos los detalles de un match específico."
+      },
+      "matches(uint256)": {
+        "notice": "Mapeo de ID de match a sus datos detallados."
+      },
+      "owner()": {
+        "notice": "La dirección del dueño del protocolo (backend), autorizado para registrar interacciones."
+      },
+      "proofOfMatchContract()": {
+        "notice": "La dirección del contrato ProofOfMatch principal."
+      },
+      "recordInteraction(uint256)": {
+        "notice": "Registra una nueva interacción para un match existente, potencialmente subiéndolo de nivel."
+      }
+    },
+    "notice": "Contrato para almacenar y gestionar los datos dinámicos de los matches, como el nivel y el número de interacciones.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 3510,
+        "contract": "contracts/Sunny/MatchData.sol:MatchData",
+        "label": "proofOfMatchContract",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 3513,
+        "contract": "contracts/Sunny/MatchData.sol:MatchData",
+        "label": "owner",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 3519,
+        "contract": "contracts/Sunny/MatchData.sol:MatchData",
+        "label": "matches",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_uint256,t_struct(Match)3431_storage)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_mapping(t_uint256,t_struct(Match)3431_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct IMatchData.Match)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Match)3431_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Match)3431_storage": {
+        "encoding": "inplace",
+        "label": "struct IMatchData.Match",
+        "members": [
+          {
+            "astId": 3420,
+            "contract": "contracts/Sunny/MatchData.sol:MatchData",
+            "label": "userA",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 3422,
+            "contract": "contracts/Sunny/MatchData.sol:MatchData",
+            "label": "userB",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 3424,
+            "contract": "contracts/Sunny/MatchData.sol:MatchData",
+            "label": "timestamp",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 3426,
+            "contract": "contracts/Sunny/MatchData.sol:MatchData",
+            "label": "locationHint",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3428,
+            "contract": "contracts/Sunny/MatchData.sol:MatchData",
+            "label": "level",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint8"
+          },
+          {
+            "astId": 3430,
+            "contract": "contracts/Sunny/MatchData.sol:MatchData",
+            "label": "interactionCount",
+            "offset": 1,
+            "slot": "4",
+            "type": "t_uint16"
+          }
+        ],
+        "numberOfBytes": "160"
+      },
+      "t_uint16": {
+        "encoding": "inplace",
+        "label": "uint16",
+        "numberOfBytes": "2"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      },
+      "t_uint8": {
+        "encoding": "inplace",
+        "label": "uint8",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}
