@@ -7,13 +7,16 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 /**
  * @title Commitment Vault
  * @author edsphinx
- * @dev Contiene un ExperienceNFT como promesa. Requiere acuerdo de ambos para actuar.
+ * @notice A secure escrow for a Real-World Asset (RWA) NFT.
+ * @dev This contract acts as a two-party escrow for an RWA NFT, such as a tokenized
+ * patient access voucher for a clinical trial. It ensures that the asset can only be
+ * redeemed or returned with the mutual consent of both participants (e.g., patient and clinic).
  */
 contract CommitmentVault is ERC721Holder {
-    address public immutable userA; // Quien crea el compromiso
-    address public immutable userB; // Quien recibe el compromiso
-    address public immutable experienceNFTAddress;
-    uint256 public immutable experienceTokenId;
+    address public immutable userA; // The user who creates the commitment (e.g., the patient or sponsor).
+    address public immutable userB; // The second party to the commitment (e.g., the clinic or researcher).
+    address public immutable experienceNFTAddress; // The second party to the commitment (e.g., the clinic or researcher).
+    uint256 public immutable experienceTokenId; // The ID of the specific RWA NFT being escrowed.
 
     bool public isRedeemed;
     bool public isDissolved;
@@ -37,14 +40,15 @@ contract CommitmentVault is ERC721Holder {
     }
 
     /**
-     * @notice Un participante aprueba el canje de la experiencia.
+     * @notice Allows a participant to approve the redemption of the experience NFT.
      */
     function approveRedemption() external onlyParticipants {
         redemptionApprovals[msg.sender] = true;
     }
 
     /**
-     * @notice Canjea la experiencia si ambos han aprobado. Transfiere el NFT a quien lo ejecuta.
+     * @notice Redeems the experience if both participants have approved.
+     * @dev Transfers the RWA NFT to the caller (`msg.sender`) upon successful execution.
      */
     function executeRedemption() external onlyParticipants {
         require(redemptionApprovals[userA] && redemptionApprovals[userB], "Both must approve");
@@ -55,14 +59,15 @@ contract CommitmentVault is ERC721Holder {
     }
 
     /**
-     * @notice Un participante aprueba la disolución del compromiso.
+     * @notice Allows a participant to approve the dissolution of the commitment.
      */
     function approveDissolution() external onlyParticipants {
         dissolutionApprovals[msg.sender] = true;
     }
 
     /**
-     * @notice Disuelve el compromiso y devuelve el NFT al comprador original si ambos aprueban.
+     * @notice Dissolves the commitment and returns the RWA NFT to the original creator (userA).
+     * @dev Requires approval from both participants before execution.
      */
     function executeDissolution() external onlyParticipants {
         require(dissolutionApprovals[userA] && dissolutionApprovals[userB], "Both must approve");
