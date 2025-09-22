@@ -7,13 +7,15 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 /**
  * @title Experience NFT
  * @author edsphinx
- * @dev Contrato para que un negocio tokenice sus servicios como vouchers NFT.
- * El dueño del contrato (el negocio) es el único que puede acuñar nuevos NFTs.
+ * @notice A contract for tokenizing real-world services as NFT vouchers.
+ * @dev In the DeSci context, this allows a sponsor (e.g., a research DAO or biotech company)
+ * to tokenize patient access to a clinical trial as an RWA NFT. The contract owner (the sponsor)
+ * is the only entity that can mint new access tokens.
  */
 contract ExperienceNFT is ERC721, Ownable {
     uint256 private _nextTokenId;
 
-    // Añadimos nuestro propio mapping para las URIs
+    // Mapping to store the URI for each specific token.
     mapping(uint256 => string) private _tokenURIs;
 
     constructor(
@@ -23,7 +25,9 @@ contract ExperienceNFT is ERC721, Ownable {
     ) ERC721(name, symbol) Ownable(initialOwner) {}
 
     /**
-     * @dev Devuelve la URI para un token específico.
+     * @dev Returns the URI for a specific token.
+     * @param tokenId The ID of the token to query.
+     * @return The URI string of the token's metadata.
      */
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         _requireOwned(tokenId); // Asegura que el token exista
@@ -31,9 +35,9 @@ contract ExperienceNFT is ERC721, Ownable {
     }
 
     /**
-     * @notice Acuña un nuevo NFT de experiencia para un comprador.
-     * @param to La dirección que recibirá el NFT (el comprador).
-     * @param _tokenURI La URI de los metadatos que describen la experiencia.
+     * @notice Mints a new trial access NFT and assigns it to a patient.
+     * @param to The patient's address that will receive the access NFT.
+     * @param _tokenURI The metadata URI that describes the trial and its terms.
      */
     function mintExperience(address to, string memory _tokenURI) public onlyOwner returns (uint256) {
         uint256 tokenId = _nextTokenId++;
