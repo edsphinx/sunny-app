@@ -1,9 +1,6 @@
 import { Address } from "~~/components/scaffold-eth";
 import { useDeployedContractInfo } from "~~/hooks/scaffold-eth";
 
-/**
- * Muestra una lista de los contratos principales del protocolo y sus direcciones.
- */
 export const ContractInfo = () => {
   const { data: proofOfMatch } = useDeployedContractInfo({ contractName: "ProofOfMatch" });
   const { data: matchData } = useDeployedContractInfo({ contractName: "MatchData" });
@@ -24,7 +21,7 @@ export const ContractInfo = () => {
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
-        <h2 className="card-title">🔗 Direcciones de Contratos (Arbitrum Sepolia)</h2>
+        <h2 className="card-title">🔗 Deployed Contracts (Arbitrum Sepolia)</h2>
         <div className="space-y-3 mt-2">
           {contracts.map(contract => (
             <div key={contract.name} className="flex flex-col gap-1 p-2 bg-base-200 rounded-md">

@@ -30,14 +30,14 @@ export const Footer = () => {
           <div className="flex justify-center items-center gap-2 text-sm w-full">
             <div className="flex justify-center items-center gap-2">
               <p className="m-0 text-center">
-                Creado con <HeartIcon className="inline-block h-4 w-4" /> para
+                Built with <HeartIcon className="inline-block h-4 w-4" /> for the
               </p>
-              <span className="font-bold">Ethereum Uruguay 2025</span>
+              <span className="font-bold"> Infinita DeSci Hackathon</span>
             </div>
             <span>·</span>
             <div className="text-center">
-              <a href="https://github.com/edsphinx/sunny-app" target="_blank" rel="noreferrer" className="link">
-                Código Fuente
+              <a href="https://github.com/edsphinx/veritas-protocol" target="_blank" rel="noreferrer" className="link">
+                Source Code
               </a>
             </div>
             <span>·</span>

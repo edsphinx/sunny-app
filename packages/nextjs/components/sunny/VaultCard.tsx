@@ -65,10 +65,9 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
   }
 
   if (!chain || !connectedAddress) {
-    // Tu lógica original para usuario no conectado (correcta)
     return (
       <div className="p-4 bg-base-200 rounded-lg text-center">
-        <p>Conecta tu wallet para ver los detalles del compromiso.</p>
+        <p>Conect your wallet to see the details of the commitment.</p>
       </div>
     );
   }
@@ -76,7 +75,7 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
   if (!commitmentVaultAbi) {
     return (
       <div className="p-4 bg-base-200 rounded-lg text-center text-error">
-        <p>El contrato CommitmentVault no ha sido desplegado en la red actual ({chain.name}).</p>
+        <p>The contract CommitmentVault still not deploy on current network ({chain.name}).</p>
       </div>
     );
   }
@@ -88,7 +87,7 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
         abi: commitmentVaultAbi,
         functionName: functionName,
       });
-      notification.success("¡Aprobación enviada! Refrescando estado...");
+      notification.success("¡Approvation Sent! Refresing state...");
 
       setTimeout(() => {
         refetchIsRedeemed();
@@ -100,17 +99,17 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
         checkAndExecute({ vaultAddress });
       }, 3000);
     } catch (e) {
-      console.error(`Error al aprobar ${functionName}`, e);
-      notification.error("Ocurrió un error al enviar tu aprobación.");
+      console.error(`Error approving ${functionName}`, e);
+      notification.error("Error occured sending your approval.");
     }
   };
 
-  const status = isRedeemed ? "Canjeado ✅" : isDissolved ? "Disuelto ❌" : "Activo ⏳";
+  const status = isRedeemed ? "Redeemed ✅" : isDissolved ? "Dissolved ❌" : "Active ⏳";
 
-  console.log("VERIFICANDO ROLES:", {
-    "Wallet Conectada": connectedAddress?.toLowerCase(),
-    "User A del Contrato": (userA as ViemAddress)?.toLowerCase(),
-    "User B del Contrato": (userB as ViemAddress)?.toLowerCase(),
+  console.log("VERIFYING ROLES:", {
+    "Wallet Conected": connectedAddress?.toLowerCase(),
+    "User A from Contract": (userA as ViemAddress)?.toLowerCase(),
+    "User B from Contract": (userB as ViemAddress)?.toLowerCase(),
   });
 
   const role =
@@ -132,20 +131,20 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
       </div>
       <div className="text-xs space-y-1">
         <div className="flex items-center gap-1">
-          <b>Creador (userA):</b> <Address address={userA as string} size="xs" />
+          <b>Creator (userA):</b> <Address address={userA as string} size="xs" />
         </div>
         <div className="flex items-center gap-1">
-          <b>Receptor (userB):</b> <Address address={userB as string} size="xs" />
+          <b>Recipient (userB):</b> <Address address={userB as string} size="xs" />
         </div>
       </div>
 
       {!isRedeemed && !isDissolved && role !== "viewer" && (
         <div className="border-t border-base-300 pt-3 mt-3 space-y-2">
-          <p className="text-xs font-semibold">Acciones Disponibles para ti ({role}):</p>
+          <p className="text-xs font-semibold">Actions Available for you ({role}):</p>
           <div className="flex flex-wrap gap-2">
             {role === "recipient" &&
               (!!userB_redeem ? (
-                <span className="text-xs italic text-success">✓ Canje Aprobado</span>
+                <span className="text-xs italic text-success">✓ Approved Redemption</span>
               ) : (
                 <button
                   className="btn btn-xs btn-success btn-outline"
@@ -155,7 +154,7 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
                   {isPending || isExecuting ? (
                     <span className="loading loading-spinner loading-xs"></span>
                   ) : (
-                    "Aprobar Canje"
+                    "Approve Redemption"
                   )}
                 </button>
               ))}
@@ -169,13 +168,13 @@ export const VaultCard = ({ vaultAddress }: VaultCardProps) => {
                 {isPending || isExecuting ? (
                   <span className="loading loading-spinner loading-xs"></span>
                 ) : (
-                  "Aprobar Disolución"
+                  "Approve Dissolution"
                 )}
               </button>
             )}
 
             {((role === "creator" && !!userA_dissolve) || (role === "recipient" && !!userB_dissolve)) && (
-              <span className="text-xs italic text-warning">✓ Disolución Aprobada</span>
+              <span className="text-xs italic text-warning">✓ Approved Dissolution</span>
             )}
           </div>
         </div>

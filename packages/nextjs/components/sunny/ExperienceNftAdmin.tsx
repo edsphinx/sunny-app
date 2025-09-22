@@ -17,13 +17,13 @@ export const ExperienceNftAdmin = () => {
   const { writeContractAsync: mintExperience, isMining } = useBackendWrite("ExperienceNFT");
 
   /**
-   * @notice Carga el historial de eventos para este contrato.
-   * @dev Para este MVP, se buscan eventos solo en los últimos 10,000 bloques para evitar
-   * sobrecargar el RPC de Alchemy y causar errores. Esta es una solución temporal
-   * que asegura que la UI funcione sin entrar en bucles de peticiones fallidas.
-   * @todo Reemplazar este mecanismo de sondeo del lado del cliente por una solución de
-   * indexación dedicada y más robusta, como Ponder, Subsquid o The Graph. Un indexer
-   * proporcionará una API mucho más rápida y eficiente para consultar datos históricos.
+   * @notice Loads the event history for this contract.
+   * @dev For this MVP, events are fetched only from the last 10,000 blocks to prevent
+   * overloading the Alchemy RPC and causing errors. This is a temporary solution
+   * that ensures the UI functions without getting into failed request loops.
+   * @todo Replace this client-side polling mechanism with a dedicated and more robust
+   * indexing solution, such as Ponder, Subsquid, or The Graph. An indexer
+   * will provide a much faster and more efficient API for querying historical data.
    */
   // @ts-ignore
   const {
@@ -38,7 +38,7 @@ export const ExperienceNftAdmin = () => {
 
   const handleMintExperience = async () => {
     if (!recipient || !isAddress(recipient)) {
-      notification.error("Por favor, introduce una dirección de destinatario válida.");
+      notification.error("Please, write a valid recipient address.");
       return;
     }
     try {
@@ -46,31 +46,29 @@ export const ExperienceNftAdmin = () => {
         { functionName: "mintExperience", args: [recipient, tokenURI] },
         {
           onBlockConfirmation: (txnReceipt: TransactionReceipt) => {
-            console.log(`📦 Experiencia acuñada en el bloque ${txnReceipt.blockNumber}! Iniciando actualización...`);
-            // Le damos al nodo RPC (Alchemy) 1-2 segundos para que su estado interno
-            // se sincronice y el nuevo evento esté disponible para ser consultado.
+            console.log(`📦 Experience minted in block ${txnReceipt.blockNumber}! Initiating update...`);
             setTimeout(() => {
-              console.log("🔄 Ejecutando refetch para actualizar la lista de NFTs...");
+              console.log("🔄 Executing refetch to update NFTs list...");
               refetchMintedNfts();
-            }, 2000); // 2 segundos de espera
+            }, 2000); // 2 seconds wait
 
             setRecipient("");
           },
         },
       );
     } catch (e) {
-      console.error("Error al acuñar la experiencia:", e);
+      console.error("Error minting experience:", e);
     }
   };
 
   return (
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
-        <h2 className="card-title">1. Admin: Crear Experiencia NFT</h2>
-        <p className="text-sm">Simula un negocio creando un voucher (RWA).</p>
+        <h2 className="card-title">1. Admin: Mint Trial Access NFT</h2>
+        <p className="text-sm">Simulates a sponsor minting a trial access voucher (RWA).</p>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Dirección del Comprador</span>
+            <span className="label-text">Patient&apos;s Address</span>
           </label>
           <AddressInput value={recipient} onChange={setRecipient} placeholder="Ej: 0x..." />
         </div>
@@ -87,19 +85,18 @@ export const ExperienceNftAdmin = () => {
         </div>
         <div className="card-actions justify-end mt-4">
           <button className="btn btn-primary" onClick={handleMintExperience} disabled={isMining}>
-            {isMining ? <span className="loading loading-spinner"></span> : "Acuñar Experiencia"}
+            {isMining ? <span className="loading loading-spinner"></span> : "Mint Access NFT"}
           </button>
         </div>
         <div className="divider my-1"></div>
         <p className="text-xs">
-          Contrato: <span className="font-mono">{experienceNFTContract?.address}</span>
+          Contract: <span className="font-mono">{experienceNFTContract?.address}</span>
         </p>
 
-        <h3 className="font-bold text-lg mt-2">Experiencias Creadas</h3>
+        <h3 className="font-bold text-lg mt-2">Created Access NFTs</h3>
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
           {isLoadingNfts && <span className="loading loading-spinner mx-auto"></span>}
           {[...(mintedNfts || [])].reverse().map((nft, index) => (
-            // 2. CAMBIO: Modificamos el JSX de la lista para incluir la imagen
             <div key={index} className="p-3 bg-base-200 rounded-lg flex items-center gap-4">
               <div className="relative w-16 h-16 rounded-md overflow-hidden shrink-0">
                 <Image
@@ -118,11 +115,11 @@ export const ExperienceNftAdmin = () => {
                     className="btn btn-xs btn-ghost"
                     onClick={() => navigator.clipboard.writeText(nft.args.tokenId?.toString() || "")}
                   >
-                    Copiar
+                    Copy
                   </button>
                 </div>
                 <div className="text-xs flex items-center">
-                  <b>Dueño:</b> <Address address={nft.args.to as string} size="xs" />
+                  <b>Owner</b> <Address address={nft.args.to as string} size="xs" />
                 </div>
               </div>
             </div>

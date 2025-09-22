@@ -9,7 +9,6 @@ import { notification } from "~~/utils/scaffold-eth";
 type SelectedNft = { address: string; tokenId: string };
 
 export const CommitmentManager = () => {
-  // === LÓGICA Y ESTADOS PARA LA CREACIÓN DE COMPROMISOS ===
   const [matchId, setMatchId] = useState("");
   const [selectedNft, setSelectedNft] = useState<SelectedNft | null>(null);
   const { address: connectedAddress } = useAccount();
@@ -51,7 +50,6 @@ export const CommitmentManager = () => {
     return allMintedNfts.filter(nft => nft.args.to?.toLowerCase() === connectedAddress.toLowerCase());
   }, [allMintedNfts, connectedAddress]);
 
-  // === HANDLERS (LÓGICA DE BOTONES) ===
   const handleApprove = async () => {
     if (!factoryContract || !experienceNftAbi || !selectedNft) {
       notification.error("Por favor, selecciona una experiencia NFT de la lista.");
@@ -97,12 +95,14 @@ export const CommitmentManager = () => {
   return (
     <div className="card bg-base-100 shadow-xl col-span-1 lg:col-span-2">
       <div className="card-body">
-        <h2 className="card-title text-3xl">Gestor de Compromisos</h2>
+        <h2 className="card-title text-3xl">Trial Manager</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-4">
           <div className="flex flex-col gap-4">
             <div>
-              <h3 className="text-xl font-semibold">Crear Nuevo Compromiso</h3>
-              <p className="text-sm text-neutral-500">Asegura una experiencia en una bóveda para un match.</p>
+              <h3 className="text-xl font-semibold">Create New Commitment</h3>
+              <p className="text-sm text-neutral-500">
+                Secure a sponsored RWA in an escrow vault for a clinical trial.
+              </p>
             </div>
 
             <input
@@ -115,7 +115,7 @@ export const CommitmentManager = () => {
 
             {matchId.length > 0 && isLoadingMatchDetails && (
               <div className="text-center">
-                <span className="loading loading-spinner loading-sm"></span> Verificando nivel...
+                <span className="loading loading-spinner loading-sm"></span> Verifying compliance...
               </div>
             )}
             {matchId.length > 0 && matchExists && !isEligible && matchDetails && (
@@ -134,15 +134,15 @@ export const CommitmentManager = () => {
                   />
                 </svg>
                 <div>
-                  <h3 className="font-bold">Nivel Insuficiente</h3>
+                  <h3 className="font-bold">Compliance Level Too Low</h3>
                   <div className="text-xs">
-                    Este match es de <b>Nivel {matchDetails.level.toString()}</b>. Se requiere <b>Nivel 2</b>.
+                    This interaction is <b>Level {matchDetails.level.toString()}</b>. Level 2 is required.
                   </div>
                 </div>
               </div>
             )}
 
-            <div className="divider text-sm">1. Selecciona tu Experiencia NFT</div>
+            <div className="divider text-sm">1. Select Your Trial Access NFT</div>
             <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
               {isLoadingNfts && <span className="loading loading-spinner mx-auto"></span>}
               {userOwnedNfts.map((nft, index) => (
@@ -157,44 +157,39 @@ export const CommitmentManager = () => {
                 </button>
               ))}
               {!isLoadingNfts && userOwnedNfts.length === 0 && (
-                <p className="text-center text-xs">No tienes Experiencias NFT en tu wallet.</p>
+                <p className="text-center text-xs">You don&apos;t have any Trial Access NFTs in your wallet.</p>
               )}
             </div>
 
-            <div className="divider text-sm">2. Ejecuta los Pasos</div>
+            <div className="divider text-sm">Step 2: Create Vault</div>
             <button
               className="btn btn-accent"
               onClick={handleApprove}
               disabled={isApproving || !selectedNft || !isEligible}
             >
-              {isApproving ? <span className="loading loading-spinner"></span> : "Paso 1: Aprobar"}
+              {isApproving ? <span className="loading loading-spinner"></span> : "Step 1: Approve"}
             </button>
             <button
               className="btn btn-primary"
               onClick={handleCreateVault}
               disabled={isCreating || !selectedNft || !isEligible}
             >
-              {isCreating ? <span className="loading loading-spinner"></span> : "Paso 2: Crear Bóveda"}
+              {isCreating ? <span className="loading loading-spinner"></span> : "Step 2: Create Vault"}
             </button>
           </div>
 
           <div className="flex flex-col gap-4">
             <div>
               <h3 className="text-xl font-semibold">
-                {/* El título ahora es dinámico */}
-                {connectedAddress ? "Actividad de Compromisos" : "Actividad del Protocolo"}
+                {connectedAddress ? "Commitment Activity" : "Protocol Activity"}
               </h3>
               <p className="text-sm text-neutral-500">
-                {connectedAddress
-                  ? "Se mostrarán solo las bóvedas en las que participas."
-                  : "Todas las bóvedas creadas."}
+                {connectedAddress ? "Showing vaults you are a part of." : "All vaults created on the protocol."}
               </p>
             </div>
             <div className="space-y-4 max-h-[32rem] overflow-y-auto pr-2">
               {isLoadingVaults && <span className="loading loading-spinner mx-auto"></span>}
 
-              {/* CAMBIO: Eliminamos el filtro 'userVaults' y mapeamos sobre TODOS los eventos.
-                  La VaultCard se encargará de ocultarse si no eres participante. */}
               {[...(allVaultEvents || [])]
                 .reverse()
                 .map(
@@ -202,9 +197,8 @@ export const CommitmentManager = () => {
                     event.args.vaultAddress && <VaultCard key={index} vaultAddress={event.args.vaultAddress} />,
                 )}
 
-              {/* Mensaje de "vacío" genérico */}
               {!isLoadingVaults && (!allVaultEvents || allVaultEvents.length === 0) && (
-                <p className="text-center text-neutral-500">No se han creado compromisos.</p>
+                <p className="text-center text-neutral-500">No commitments have been created yet.</p>
               )}
             </div>
           </div>
