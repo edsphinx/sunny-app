@@ -9,11 +9,11 @@ import { IProofOfMatch } from "./IProofOfMatch.sol";
 /**
  * @title Proof of Match (PoM)
  * @author edsphinx
- * @notice Contrato para acuñar Soulbound Tokens (SBTs) que representan un match verificado
- * en el mundo real entre dos personas. Este es el contrato central de registro de tokens.
- * @dev Hereda de ERC721 y Ownable. Implementa la interfaz IProofOfMatch.
- * Se encarga de la acuñación y la lógica Soulbound, delegando el almacenamiento de datos
- * a un contrato MatchData.
+ * @notice Mints "Proof of Protocol" Soulbound Tokens (SBTs) representing a verified,
+ * real-world interaction within a scientific protocol. This is the core token registry.
+ * @dev Inherits from ERC721 and Ownable. It is responsible for minting and enforcing the
+ * non-transferable (Soulbound) nature of the tokens. It delegates the storage of dynamic
+ * interaction data (like compliance levels) to a MatchData contract.
  */
 contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     // --- State Variables ---
@@ -26,7 +26,7 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     mapping(uint256 => uint256) private _tokenIndex;
 
     /**
-     * @notice La dirección del contrato MatchData que almacena los detalles de los niveles.
+     * @notice The address of the MatchData contract, which stores details for each interaction.
      */
     IMatchData public matchDataContract;
 
@@ -36,9 +36,9 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     // --- Admin Functions ---
 
     /**
-     * @notice Establece la dirección del contrato de datos (MatchData).
-     * @dev Debe ser llamado por el owner antes de poder crear matches.
-     * @param _contractAddress La dirección del contrato MatchData desplegado.
+     * @notice Sets the address of the MatchData data contract.
+     * @dev Must be called by the owner before any interactions can be created.
+     * @param _contractAddress The address of the deployed MatchData contract.
      */
     function setMatchDataContract(address _contractAddress) public onlyOwner {
         matchDataContract = IMatchData(_contractAddress);
@@ -47,12 +47,12 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     // --- Core Functions ---
 
     /**
-     * @notice Crea un nuevo match, acuñando un SBT para cada usuario.
-     * @dev Llama al contrato MatchData para crear la entrada de datos correspondiente.
-     * Solo puede ser llamado por el owner (backend).
-     * @param _userA Dirección del primer usuario.
-     * @param _userB Dirección del segundo usuario.
-     * @param _locationHint Pista sobre la ubicación del match.
+     * @notice Creates a new on-chain record of an interaction, minting one SBT for each participant.
+     * @dev Calls the MatchData contract to create the corresponding data entry.
+     * Can only be called by the owner (backend/oracle).
+     * @param _userA The address of the first participant (e.g., patient).
+     * @param _userB The address of the second participant (e.g., clinic).
+     * @param _locationHint A hint describing the interaction (e.g., "Week 4 Check-in").
      */
     function createMatch(address _userA, address _userB, string memory _locationHint) public onlyOwner {
         require(address(matchDataContract) != address(0), "MatchData contract not set");
@@ -84,14 +84,14 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     // --- Soulbound Logic ---
 
     /**
-     * @dev Sobrescrito para prevenir transferencias. Lanza un error siempre.
+     * @dev Overridden to enforce Soulbound (non-transferable) logic. Always reverts.
      */
     function transferFrom(address, address, uint256) public pure override {
         revert("Este es un Token Soulbound y no se puede transferir.");
     }
 
     /**
-     * @dev Sobrescrito para prevenir transferencias. Lanza un error siempre.
+     * @dev Overridden to enforce Soulbound (non-transferable) logic. Always reverts.
      */
     function safeTransferFrom(address, address, uint256, bytes memory) public pure override {
         revert("Este es un Token Soulbound y no se puede transferir.");
@@ -100,15 +100,13 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     // --- Internal Functions ---
 
     /**
-     * @dev Sobrescrito de ERC721 para rastrear los tokens de cada dueño.
+     * @dev Overridden from ERC721 to enable tracking of tokens owned by each address.
      */
     function _update(address to, uint256 tokenId, address auth) internal override returns (address) {
         address from = _ownerOf(tokenId);
 
-        // Lógica de OpenZeppelin (no tocar)
         super._update(to, tokenId, auth);
 
-        // Nuestra lógica de rastreo
         if (from != address(0)) {
             _removeTokenFromOwnerEnumeration(from, tokenId);
         }
@@ -119,7 +117,7 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     }
 
     /**
-     * @dev Añade un token al array de un dueño. Lógica interna para getTokensOfOwner.
+     * @dev Internal logic to add a token to an owner's array for enumeration.
      */
     function _addTokenToOwnerEnumeration(address to, uint256 tokenId) private {
         _tokenIndex[tokenId] = _userTokens[to].length;
@@ -127,7 +125,7 @@ contract ProofOfMatch is ERC721, Ownable, IProofOfMatch {
     }
 
     /**
-     * @dev Elimina un token del array de un dueño de forma eficiente (swap-and-pop).
+     * @dev Internal logic to efficiently remove a token from an owner's array (swap-and-pop).
      */
     function _removeTokenFromOwnerEnumeration(address from, uint256 tokenId) private {
         uint256 lastTokenIndex = _userTokens[from].length - 1;

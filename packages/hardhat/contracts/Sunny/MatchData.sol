@@ -6,28 +6,27 @@ import { IMatchData } from "./IMatchData.sol";
 /**
  * @title Match Data
  * @author edsphinx
- * @notice Contrato para almacenar y gestionar los datos dinámicos de los matches,
- * como el nivel y el número de interacciones.
- * @dev Separa la lógica de datos de la lógica de tokens (SBT) para mayor
- * seguridad y flexibilidad.
+ * @notice Contract to store and manage dynamic data for on-chain scientific interactions.
+ * @dev This contract separates the interaction data logic (e.g., compliance levels)
+ * from the SBT token logic for greater security and flexibility.
  */
 contract MatchData is IMatchData {
     /**
-     * @notice La dirección del contrato ProofOfMatch principal.
+     * @notice The address of the main ProofOfMatch (SBT registry) contract.
      */
     address public proofOfMatchContract;
     /**
-     * @notice La dirección del dueño del protocolo (backend), autorizado para registrar interacciones.
+     * @notice The address of the protocol owner (backend/oracle), authorized to log new interactions.
      */
     address public owner;
 
     /**
-     * @notice Mapeo de ID de match a sus datos detallados.
+     * @notice Mapping from an interaction ID (`matchId`) to its detailed data.
      */
     mapping(uint256 => Match) public matches;
 
     /**
-     * @dev Modificador para restringir funciones solo al dueño del protocolo.
+     * @dev Modifier to restrict functions to only the protocol owner.
      */
     modifier onlyOwner() {
         require(msg.sender == owner, "Not the owner");
@@ -35,7 +34,7 @@ contract MatchData is IMatchData {
     }
 
     /**
-     * @dev Al desplegar, se establecen las direcciones inmutables del contrato de SBTs y del dueño.
+     * @dev On deployment, sets the addresses of the SBT contract and the protocol owner.
      */
     constructor(address _proofOfMatchAddress, address _ownerAddress) {
         proofOfMatchContract = _proofOfMatchAddress;
@@ -44,7 +43,8 @@ contract MatchData is IMatchData {
 
     /**
      * @inheritdoc IMatchData
-     * @dev La seguridad se garantiza requiriendo que `msg.sender` sea el contrato ProofOfMatch.
+     * @dev Security is enforced by requiring `msg.sender` to be the ProofOfMatch contract,
+     * ensuring data entries are only created when an SBT is minted.
      */
     function createMatchEntry(
         uint256 _matchId,
@@ -52,7 +52,6 @@ contract MatchData is IMatchData {
         address _userB,
         string memory _locationHint
     ) external override {
-        // Solo el contrato ProofOfMatch puede llamar esta función
         require(msg.sender == proofOfMatchContract, "Only ProofOfMatch can create entries");
 
         matches[_matchId] = Match({
@@ -67,8 +66,8 @@ contract MatchData is IMatchData {
 
     /**
      * @inheritdoc IMatchData
-     * @dev La seguridad se garantiza con el modificador onlyOwner.
-     * La lógica de niveles puede ser ajustada aquí en futuras versiones.
+     * @dev Security is enforced by the onlyOwner modifier. The compliance leveling
+     * logic can be adjusted here in future versions.
      */
     function recordInteraction(uint256 _matchId) external override onlyOwner {
         Match storage matchToUpdate = matches[_matchId];
