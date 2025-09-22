@@ -1,5 +1,7 @@
 # Veritas Protocol 🧬
 
+![Veritas Logo](https://github.com/edsphinx/veritas-protocol/blob/main/.github/assets/veritas-logo.png)
+
 ### An On-Chain Protocol for Verifiable Clinical Audit Trails.
 
 *A project for the DeSci Builders Hackathon, building for the Infinita/Próspera jurisdiction.*
@@ -7,9 +9,10 @@
 ---
 
 **Key Links:**
-* **Live Demo:** `#`
-* **Video Pitch (3-4 min):** `#`
-* **Repository:** `#`
+* **Live Demo:** 
+[![Veritas Protocol](https://img.youtube.com/vi/DGrdj9Z_0F0/0.jpg)](https://youtube.com/shorts/DGrdj9Z_0F0)
+* **Hackathon**
+[![Ver Proyecto en Taikai](https://img.shields.io/badge/Ver%20Proyecto-Taikai-blue)](https://taikai.network/infinitacity/hackathons/desci-builders/projects/cmfuq29ub00wf94s7fmv2t7nc/idea)
 
 ---
 
