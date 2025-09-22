@@ -52,7 +52,7 @@ export const CommitmentManager = () => {
 
   const handleApprove = async () => {
     if (!factoryContract || !experienceNftAbi || !selectedNft) {
-      notification.error("Por favor, selecciona una experiencia NFT de la lista.");
+      notification.error("Please select an Trial Access NFT from the list.");
       return;
     }
     try {
@@ -62,15 +62,15 @@ export const CommitmentManager = () => {
         functionName: "approve",
         args: [factoryContract.address, BigInt(selectedNft.tokenId)],
       });
-      notification.success("Aprobación exitosa!");
+      notification.success("Approval successful!");
     } catch (e) {
-      console.error("Error al aprobar:", e);
+      console.error("Error approving:", e);
     }
   };
 
   const handleCreateVault = async () => {
     if (!selectedNft) {
-      notification.error("Por favor, selecciona una experiencia NFT de la lista.");
+      notification.error("Please select an Trial Access NFT from the list.");
       return;
     }
     try {
@@ -81,8 +81,8 @@ export const CommitmentManager = () => {
         },
         {
           onBlockConfirmation: (txnReceipt: TransactionReceipt) => {
-            console.log("🏦 Bóveda de Compromiso creada!", txnReceipt.blockHash);
-            notification.success("¡Bóveda de Compromiso creada!");
+            console.log("🏦 Commitment Vault created!", txnReceipt.blockHash);
+            notification.success("Commitment Vault created!");
             setTimeout(() => refetchVaults(), 2000);
           },
         },
@@ -107,7 +107,7 @@ export const CommitmentManager = () => {
 
             <input
               type="text"
-              placeholder="Pega el ID del Match aquí"
+              placeholder="Please paste the Match ID here."
               className="input input-bordered"
               value={matchId}
               onChange={e => setMatchId(e.target.value)}
