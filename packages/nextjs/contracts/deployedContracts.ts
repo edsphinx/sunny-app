@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   421614: {
     CommitmentVault: {
-      address: "0x99d73a610cf18C55a28b609034c7B40594D0b407",
+      address: "0x6F72ED4F88C54f5146629A39F5272e82D1422d49",
       abi: [
         {
           inputs: [
@@ -243,10 +243,10 @@ const deployedContracts = {
       inheritedFunctions: {
         onERC721Received: "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol",
       },
-      deployedOnBlock: 195070022,
+      deployedOnBlock: 196873920,
     },
     CommitmentVaultFactory: {
-      address: "0xB6eD305e9a5F91E02184c8504bEAdF581C41C4c8",
+      address: "0x7c13601382D65e4ec69aA3adcAD86f48EcBCD626",
       abi: [
         {
           inputs: [
@@ -341,10 +341,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 195007307,
+      deployedOnBlock: 196873901,
     },
     ExperienceNFT: {
-      address: "0x4A0466Bc28b54FB3cB7c1a4A91cc5a8895f58aDc",
+      address: "0xb9e847f664227f883bcE636268D286D38803ec15",
       abi: [
         {
           inputs: [
@@ -916,10 +916,10 @@ const deployedContracts = {
         renounceOwnership: "@openzeppelin/contracts/access/Ownable.sol",
         transferOwnership: "@openzeppelin/contracts/access/Ownable.sol",
       },
-      deployedOnBlock: 195007317,
+      deployedOnBlock: 196873911,
     },
     MatchData: {
-      address: "0x87DFa5646f097F52448A93f273AB835974d72643",
+      address: "0xeEB8370aBE5Aa30faAc2d4be6A3C5CDC406beB75",
       abi: [
         {
           inputs: [
@@ -1124,10 +1124,10 @@ const deployedContracts = {
         getMatchDetails: "contracts/Sunny/IMatchData.sol",
         recordInteraction: "contracts/Sunny/IMatchData.sol",
       },
-      deployedOnBlock: 195007280,
+      deployedOnBlock: 196873875,
     },
     PresenceScore: {
-      address: "0x92e04D680232dA68E1086B4D6E4a336533138324",
+      address: "0xF03e98ca959843229fFca2d70aFAA42F69fBef95",
       abi: [
         {
           inputs: [
@@ -1192,10 +1192,10 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deployedOnBlock: 195007296,
+      deployedOnBlock: 196873891,
     },
     ProofOfMatch: {
-      address: "0x88f9f78f8AD5Ac224ec48Fef7F345299e7411D14",
+      address: "0x7a8fbD7070dF7c9495Fe00c5FBF1B118e98Fe325",
       abi: [
         {
           inputs: [],
@@ -1877,7 +1877,7 @@ const deployedContracts = {
         getTokensOfOwner: "contracts/Sunny/IProofOfMatch.sol",
         tokenToMatchId: "contracts/Sunny/IProofOfMatch.sol",
       },
-      deployedOnBlock: 195007268,
+      deployedOnBlock: 196873866,
     },
   },
 } as const;

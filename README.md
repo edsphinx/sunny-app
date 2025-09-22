@@ -147,8 +147,6 @@ yarn start
 
 ---
 
-### Sección 9: Equipo y Licencia
-
 ## 8. 👥 Team
 
 | Name                | Role                           | Github / Social                          |

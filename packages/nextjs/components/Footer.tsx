@@ -42,7 +42,7 @@ export const Footer = () => {
             </div>
             <span>·</span>
             <div className="flex justify-center items-center gap-1">
-              <p className="m-0 text-center">un proyecto de</p>
+              <p className="m-0 text-center">a project by</p>
               <a href="https://github.com/edsphinx" target="_blank" rel="noreferrer" className="link font-semibold">
                 edsphinx
               </a>

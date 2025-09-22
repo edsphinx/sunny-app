@@ -10,12 +10,12 @@ export const ContractInfo = () => {
   const { data: commitmentVault } = useDeployedContractInfo({ contractName: "CommitmentVault" });
 
   const contracts = [
-    { name: "ProofOfMatch (SBTs)", data: proofOfMatch },
-    { name: "MatchData (Niveles)", data: matchData },
-    { name: "PresenceScore (Reputación)", data: presenceScore },
-    { name: "CommitmentVault (RWA)", data: commitmentVault },
-    { name: "CommitmentVaultFactory (RWA)", data: commitmentVaultFactory },
-    { name: "ExperienceNFT (Ejemplo RWA)", data: experienceNFT },
+    { name: "ProofOfMatch (PoP SBTs)", data: proofOfMatch },
+    { name: "MatchData (Compliance Levels)", data: matchData },
+    { name: "ComplianceScore (Reputation)", data: presenceScore },
+    { name: "CommitmentVaultFactory (RWA Factory)", data: commitmentVaultFactory },
+    { name: "ExperienceNFT (RWA Voucher Example)", data: experienceNFT },
+    { name: "CommitmentVault (RWA Escrow Logic)", data: commitmentVault },
   ];
 
   return (
