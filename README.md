@@ -1,6 +1,6 @@
 # Veritas Protocol 🧬
 
-![Veritas Logo](https://github.com/edsphinx/veritas-protocol/blob/main/.github/assets/veritas-logo.png)
+![Veritas Logo](https://github.com/edsphinx/veritas-protocol/blob/main/packages/nextjs/public/veritas-logo.png)
 
 ### An On-Chain Protocol for Verifiable Clinical Audit Trails.
 
