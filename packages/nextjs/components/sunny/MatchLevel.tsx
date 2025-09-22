@@ -22,7 +22,7 @@ export const MatchLevel = ({ matchId }: MatchLevelProps) => {
         matchDetails?.level && matchDetails.level >= 3 ? "badge-primary" : ""
       }`}
     >
-      Nivel: {matchDetails?.level?.toString() || "1"}
+      Level: {matchDetails?.level?.toString() || "1"}
     </span>
   );
 };

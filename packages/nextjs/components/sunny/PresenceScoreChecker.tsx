@@ -41,7 +41,7 @@ export const PresenceScoreChecker = () => {
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title">4. Public: Verify Compliance Score</h2>
-        <p className="text-sm">Haz clic en una dirección de la lista para ver su puntuación.</p>
+        <p className="text-sm">Click an address from the list to see its score.</p>
 
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2 mt-4">
           {isLoadingMatches && <span className="loading loading-spinner mx-auto"></span>}
