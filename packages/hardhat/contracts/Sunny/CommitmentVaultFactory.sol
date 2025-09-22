@@ -8,7 +8,9 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 /**
  * @title Commitment Vault Factory
  * @author edsphinx
- * @dev Contrato para que las parejas creen sus propias Bóvedas de Compromisos.
+ * @notice A factory contract that allows participants to create their own Commitment Vaults.
+ * @dev This contract creates individual escrow vaults (`CommitmentVault`) for securing
+ * RWA NFTs, such as tokenized access to clinical trials.
  */
 contract CommitmentVaultFactory {
     IMatchData public matchDataContract;
@@ -21,16 +23,19 @@ contract CommitmentVaultFactory {
     }
 
     /**
-     * @notice Crea una Bóveda de Compromisos para un match.
-     * @dev Verifica que el nivel del match sea 2 o superior.
-     * El llamador debe ser parte del match y ser el dueño del ExperienceNFT.
+     * @notice Creates a Commitment Vault for a specific on-chain interaction.
+     * @dev Verifies that the interaction's compliance level is 2 or higher.
+     * The caller must be a participant in the interaction and the owner of the RWA NFT.
+     * @param _matchId The ID of the on-chain interaction (e.g., a verified clinical visit).
+     * @param _experienceNFTAddress The address of the RWA NFT contract (e.g., Trial Access Token).
+     * @param _experienceTokenId The ID of the specific RWA NFT to be escrowed.
      */
     function createCommitmentVault(
         uint256 _matchId,
         address _experienceNFTAddress,
         uint256 _experienceTokenId
     ) external {
-        // --- Verificaciones de Seguridad ---
+        // --- Security Checks ---
         require(matchIdToVault[_matchId] == address(0), "Vault already exists for this match");
 
         IMatchData.Match memory currentMatch = matchDataContract.getMatchDetails(_matchId);
@@ -47,11 +52,11 @@ contract CommitmentVaultFactory {
             revert("You are not part of this match");
         }
 
-        // --- Creación y Transferencia ---
+        // --- Creation and Transfer ---
         CommitmentVault newVault = new CommitmentVault(userA, userB, _experienceNFTAddress, _experienceTokenId);
         matchIdToVault[_matchId] = address(newVault);
 
-        // Transfiere el NFT del usuario a la nueva bóveda
+        // Transfers the RWA NFT from the user to the newly created vault.
         IERC721(_experienceNFTAddress).safeTransferFrom(msg.sender, address(newVault), _experienceTokenId);
 
         emit VaultCreated(_matchId, address(newVault), msg.sender);
